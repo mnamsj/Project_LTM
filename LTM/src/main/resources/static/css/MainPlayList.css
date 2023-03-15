@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+.addimage{
+	position: absolute;
+	width: 30px;
+	height: 30px;
+}
+
+.search {
+	height: 40px;
+	width: 400px;
+	border: 1px solid black;
+	background: #ffffff;
+}
+
+.search input {
+	font-size: 16px;
+	width: 325px;
+	padding: 10px;
+	border: 0px;
+	outline: none;
+	float: left;
+}
+
+.search button {
+	width: 50px;
+	height: 100%;
+	border: 0px;
+	background: black;
+	outline: none;
+	float: right;
+	color: #ffffff;
+}
+
+li {
+	list-style: none;
+}
+
+.Allplaylist {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 15px;
+}
+
+.item {
+	position: relative;
+	width: 80%;
+	margin: 10px auto;
+	border: 1px solid #000000;
+}
+
+.plimage {
+	width: 100%;
+	vertical-align: middle;
+}
+
+.titletext {
+	position: absolute;
+	top: 15%;
+	left: 20%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	color: white;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.idtext {
+	position: absolute;
+	top: 85%;
+	left: 80%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+}

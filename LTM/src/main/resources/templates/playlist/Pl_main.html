@@ -2,17 +2,19 @@
 <html xmlns:th="www.thymeleaf.org" 
 	  layout:decorate="~{layout}"
 	  lang="en">
-
-<link rel="stylesheet" type="text/css" th:href="@{/css/playlist.css}">
+<head>
+<link rel="stylesheet" type="text/css" th:href="@{/css/MainPlayList.css}">
 </head>
 <body>
 <div layout:fragment="content" class="blog-area section_padding_100 mt-100">
 	<div class="container">
 		<div class="row justify-content-center">
 
-    <div class="row my-3">
+    <div class="row my-3" style="width:100%; display:flex; align-items: center;">
         <div class="col-4">
-            <a th:href="@{/playlist/new}">내 플레이리스트 만들기</a>
+            <a th:href="@{/playlist/new}">
+            	<img class="addimage" src="https://cdn.icon-icons.com/icons2/1515/PNG/512/add_105065.png"/>
+            </a>
         </div>
         <div class="col-4">
             <a th:href="@{/search}">노래 검색</a>
@@ -25,20 +27,26 @@
         </div>
     </div>
  
+ 	<hr>
 
-		<table>
-		        <tr th:each="Playlist, PlaylistStatus : ${paging}">
-		        	<td th:each="Playlist, PlaylistStatus : ${paging}">
-		        		<a th:href="@{/playlist/{id}/song (id=${Playlist.id})}">
-						<img th:src="@{/img/} + ${Playlist.image}" />
-						<!-- <p th:text="${Playlist.nickname}"></p> -->
-						<p th:text="${Playlist.title}"></p>
-						<a sec:authorize="isAuthenticated()" href="#" th:onclick="wishlist('[[${Playlist.id}]]')">좋아요</a>
-						</a>
-					</td>	
-						
-		        </tr>
-		</table>
+		<!-- 플레이리스트 목록 -->
+		<div class="Allplaylist">
+		        <div class="item" th:each="Playlist, PlaylistStatus : ${paging}">
+		        	
+					<img class="plimage" src="https://cdn.pixabay.com/photo/2020/04/20/09/31/moon-5067423_960_720.jpg">
+					<!-- <p th:text="${Playlist.nickname}"></p> -->
+					<a th:href="@{/playlist/{id}/song (id=${Playlist.id})}">
+						<span class="titletext" th:text="${Playlist.title}"></span>
+					</a>
+					<a sec:authorize="isAuthenticated()" th:onclick="wishlist('[[${Playlist.id}]]')">
+						<span class="idtext">
+							좋아요
+						</span>
+					
+					</a>
+				</div>				
+		</div>
+		
 		<!-- 페이징 처리 -->
 		<div th:if="${!paging.isEmpty()}">
 	        <ul class="pagination justify-content-center">
