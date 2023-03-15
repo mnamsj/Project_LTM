@@ -14,6 +14,11 @@ public class MainController {
 		
 		return "main/main"; 
 	}
+	@GetMapping("/door")
+	public String door() {
+		
+		return "main/door"; 
+	}
 	@Bean
 	public ClassLoaderTemplateResolver secondaryTemplateResolver3() {
 	    ClassLoaderTemplateResolver secondaryTemplateResolver3 = new ClassLoaderTemplateResolver();

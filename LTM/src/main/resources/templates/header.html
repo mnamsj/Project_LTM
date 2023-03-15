@@ -38,35 +38,19 @@
                       >
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" th:href="@{/playlist/list}">Playlist</a>
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/playlist/list}">Playlist</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" th:href="@{/cboard/list}">Community</a>
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/cboard/list}">Community</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" th:href="@{/adboard/list}">notice</a>
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/adboard/list}">notice</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" th:href="@{/event}">Event</a>
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/event}">Event</a>
                     </li>
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        id="navbarDropdown"
-                        role="button"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        >MyPages</a
-                      >
-                      <div
-                        class="dropdown-menu"
-                        aria-labelledby="navbarDropdown"
-                      >
-                        <a class="dropdown-item" href="">Myplaylist</a>
-                        <a class="dropdown-item" href="">Account</a>
-                      </div>
+                    <li class="nav-item">
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/event}">MyPage</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/member/login}">LOGIN</a>
