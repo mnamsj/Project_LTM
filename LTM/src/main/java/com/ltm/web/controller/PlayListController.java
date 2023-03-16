@@ -44,10 +44,6 @@ public class PlayListController {
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/new")
 	public String createForm(Model model,Principal principal) {
-		// 로그인된 회원 정보 가져오기.
-		// @RequestParam("memberId") String memberId
-		// Member member = memberService.getMember(memberId);
-		// model.addAttribute("member",member);
 
 		model.addAttribute("playListForm", new PlayListFormDto());
 		return "playlist/createPlForm";
@@ -75,14 +71,13 @@ public class PlayListController {
 	}
 
 	// 업데이트할 리스트 목록
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/mylist")
-	public String showAll(Model model) {
+	public String showAll(Model model, Principal principal) {
 
-//		List<Member> members = memberService.findMembers(); 수정 필요
-		List<PlayList> lists = playListService.findPl();
+		List<PlayList> myList = playListService.findMemberPl(principal.getName());
 
-		model.addAttribute("lists", lists);
-//		model.addAttribute("members", members); 수정 필요
+		model.addAttribute("mylist", myList);
 
 		return "playlist/MyPlayList";
 	}
@@ -101,14 +96,14 @@ public class PlayListController {
 			@RequestParam("discription") String discription) throws Exception {
 		playListService.updatePl(plId, title, discription);
 
-		return "redirect:/";
+		return "redirect:/playlist/mylist";
 	}
 
 	// 플레이리스트 삭제
 	@PostMapping("/delete")
 	public String deletePl(@RequestParam("plId") Long plId) throws Exception {
 		playListService.deletePl(plId);
-		return "redirect:/";
+		return "redirect:/playlist/mylist";
 	}
 
 	// 페이징 처리된 전체 플레이리스트
@@ -154,7 +149,7 @@ public class PlayListController {
 	public String removeSong(@RequestParam("plSongId") Long plSongId) {
 		PlSong plSong = plSongService.findOne(plSongId);
 		plSongRepository.delete(plSong);
-		return "redirect:/";
+		return "redirect:/playlist/{plId}/song";
 	}
 
 	

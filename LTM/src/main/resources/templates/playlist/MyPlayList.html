@@ -12,20 +12,17 @@
 				<th>#</th>
 				<th>제목</th>
 				<th>설명</th>
-				<th>회원아이디</th>
-				<th></th>
 			</tr>
 		</thead>
 		
 		<tbody>
-			<tr th:each="list : ${lists}">
+			<tr th:each="list : ${mylist}">
 				<td th:text="${list.id}"></td>
-				<td th:text="${list.title}"></td>
+				<td><a href="#" th:href="@{/playlist/{id}/song (id=${list.id})}" th:text="${list.title}"></a></td>
 				<td th:text="${list.discription}"></td>
-				<td></td>
 				<td><a href="#" th:href="@{/playlist/{id}/update (id=${list.id})}"
 						 role="button">수정하기</a></td>
-				<td><a href="#" th:onclick="remove('[[${list.id}]]')"
+				<td><a href="#" th:onclick="deletePl('[[${list.id}]]')"
 						 role="button">삭제하기</a></td>	
 			</tr>
 		</tbody>
@@ -36,8 +33,8 @@
 </div>
 
 </body>
-<script>
-	function remove(plId) {
+<script layout:fragment="script" type='text/javascript'>
+	function deletePl(plId) {
 		var form = document.createElement("form");
 		form.setAttribute("method", "post");
 		form.setAttribute("action", "/playlist/delete");

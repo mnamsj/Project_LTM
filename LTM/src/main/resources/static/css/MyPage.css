@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.mypage-header h1{
+	text-align: center;
+}
+
+.playlist-header ul{
+	float: left;
+	
+}
+
+.box{
+position: absolute;
+width: 136px;
+height: 143px;
+left: 600px;
+top: 500px;
+background: black;
+}

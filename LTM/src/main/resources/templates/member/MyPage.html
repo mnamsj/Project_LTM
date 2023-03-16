@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org" 
+	  layout:decorate="~{layout}"
+	  lang="en">
+<head>
+<link rel="stylesheet" href="/css/MyPage.css">
+</head>
+<body>
+
+	<section layout:fragment="content"
+		class="blog-area section_padding_100 mt-100">
+		<div class="container">
+			<div class="row justify-content-center">
+				
+				<div class="mypage-header">
+					<h1>MyPage</h1>
+				</div>
+				<div class="playlist-header">
+					<ul>
+						<li><a th:href="@{/playlist/mylist}">MyList</a></li>
+						<li><a>WishList</a></li>
+					</ul>
+				</div>
+				<hr>
+				
+				
+				<h2 th:text="${memberInfo.id}"></h2>
+				<h2 th:text="${memberInfo.nickname}"></h2>
+				<h2 th:text="${memberInfo.email}"></h2>
+				
+				
+				<div class="box">
+				</div>
+				
+			</div>
+		</div>
+	</section>
+
+
+	<!-- JS -->
+	<script src="/vendor/jquery/jquery.min.js"></script>
+
+</body>
+<!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

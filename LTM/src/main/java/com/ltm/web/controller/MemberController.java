@@ -1,10 +1,14 @@
 package com.ltm.web.controller;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +18,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import com.ltm.web.Dto.MemberFormDto;
 import com.ltm.web.Service.MemberService;
+import com.ltm.web.entity.Member;
 import com.ltm.web.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -63,6 +68,16 @@ public class MemberController {
 	@GetMapping("/agree")
 	public String agree() {
 		return "member/memberAgree";
+	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/mypage")
+	public String myPage(Principal principal, Model model) {
+		
+		Member member = this.memberService.getMember(principal.getName());
+		
+		model.addAttribute("memberInfo", member);
+		return "member/MyPage";
 	}
 
 	@Bean
