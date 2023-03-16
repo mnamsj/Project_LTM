@@ -38,17 +38,18 @@
                       >
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" th:href="@{/playlist/list}">Playlist</a>
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/playlist/list}">Playlist</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" th:href="@{/cboard/list}">Community</a>
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/cboard/list}">Community</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" th:href="@{/adboard/list}">notice</a>
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/adboard/list}">notice</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" th:href="@{/event}">Event</a>
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/event}">Event</a>
                     </li>
+<<<<<<< HEAD
                     <li class="nav-item dropdown">
                       <a
                         class="nav-link dropdown-toggle"
@@ -67,6 +68,10 @@
                         <a class="dropdown-item" href="/member/mypage">Myplaylist</a>
                         <a class="dropdown-item" href="">Account</a>
                       </div>
+=======
+                    <li class="nav-item">
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/event}">MyPage</a>
+>>>>>>> bd99d0b8ac2c7c67ca7fa960c11e51d7d1e13173
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/member/login}">LOGIN</a>
