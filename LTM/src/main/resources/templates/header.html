@@ -49,7 +49,6 @@
                     <li class="nav-item">
                       <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/event}">Event</a>
                     </li>
-<<<<<<< HEAD
                     <li class="nav-item dropdown">
                       <a
                         class="nav-link dropdown-toggle"
@@ -59,20 +58,15 @@
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
-                        >MyPages</a
-                      >
+                        >MyPages</a>
                       <div
                         class="dropdown-menu"
                         aria-labelledby="navbarDropdown"
                       >
-                        <a class="dropdown-item" href="/member/mypage">Myplaylist</a>
+                        <a class="dropdown-item" href="/member/mypage">MyList</a>
                         <a class="dropdown-item" href="">Account</a>
                       </div>
-=======
-                    <li class="nav-item">
-                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/event}">MyPage</a>
->>>>>>> bd99d0b8ac2c7c67ca7fa960c11e51d7d1e13173
-                    </li>
+
                     <li class="nav-item">
                       <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/member/login}">LOGIN</a>
                       <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">LOGOUT</a>
