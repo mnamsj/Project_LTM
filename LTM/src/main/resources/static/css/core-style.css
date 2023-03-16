@@ -951,12 +951,12 @@ img {
 .page-item.active .page-link {
     z-index: 1;
     color: #1d1d1d;
-    background-color: transparent;
-    border-color: transparent;
-    padding-right: 80px;
+    background-color: #ced4da;
+    border-color: #ced4da;
+    /* padding-right: 80px; */
 }
 
-.page-item.active .page-link:after {
+/* .page-item.active .page-link:after {
     content: '';
     width: 70px;
     height: 2px;
@@ -964,7 +964,7 @@ img {
     position: absolute;
     bottom: 13px;
     left: 45px;
-}
+} */
 
 .contact-form-area form .form-control {
     margin-bottom: 30px;
