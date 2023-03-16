@@ -33,7 +33,7 @@ public class SecurityConfig {
 		.and() //2023-02-27 추가
             .logout()
             .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-            .logoutSuccessUrl("/main")
+            .logoutSuccessUrl("/")
             .invalidateHttpSession(true)	
 			
          .and() //2023-03-14 추가 csrf토큰 안넣어도 됨.
