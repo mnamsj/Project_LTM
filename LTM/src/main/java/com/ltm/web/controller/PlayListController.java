@@ -178,9 +178,16 @@ public class PlayListController {
 					        @RequestParam("songTitle") String songTitle,
 					        @RequestParam("singer") String singer) {
 
-		String songImage = songImageApi.getImage(songTitle, singer);
-		
+		String songImage = songImageApi.getImage(songTitle, singer);		
 		plSongService.plSong(plId, songTitle, singer, songImage);// 담은 노래의 id
+		
+//		PlayList playList = playListService.findOne(plId);
+//		if(playList.getImage()==null) {
+//			String plImage = songImage.get(1);
+//			System.out.println("이미지 : " + plImage);
+//			playList.setImage(plImage);
+//			playListService.savePl(playList);
+//		}
 
 		return "redirect:/search";
 	}

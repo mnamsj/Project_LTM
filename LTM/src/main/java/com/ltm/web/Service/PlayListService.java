@@ -71,6 +71,10 @@ public class PlayListService {
 			throw new Exception();
 		}
 	}
+	
+//	public String findImage(Long plId) {
+//		return playListRepository.findPlayListImage(plId);
+//	}
 
 	// 내 플레이리스트 조회 + 노래 넣을 플레이리스트 목록 조회
 	public List<PlayList> findMemberPl(String memberId) {

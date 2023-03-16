@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>PL DETAIL</title>
 
-<link rel="stylesheet" type="text/css" th:href="@{/css/playlist.css}">
+<!-- <link rel="stylesheet" type="text/css" th:href="@{/css/playlist.css}"> -->
 </head>
 <body>
 플레이리스트 상세화면<br>
@@ -23,7 +23,7 @@
 			<!-- <img th:src="@{/img/album/} + ${Song.thumbnail}" /> -->
 			<li th:text="${Song.songTitle}"></li>
 			<li th:text="${Song.singer}"></li>
-			<li><img th:src="${Song.image}"></li>
+			<li><img class="songimg" th:src="${Song.image}"></li>
 			<li sec:authorize="isAuthenticated()"><a href="#"
 					th:onclick="remove('[[${Song.id}]]','[[${Song.playList.id}]]')">삭제</a></li>
 		</ul>

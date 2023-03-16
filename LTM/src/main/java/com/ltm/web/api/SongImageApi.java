@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -71,12 +73,22 @@ public class SongImageApi {
 
 		JSONArray image = (JSONArray) album.get("image");
 
-		String text = "";
+		String smallText = "";
+//		String largeText = "";
 
-		JSONObject imageText = (JSONObject) image.get(0);
-		text = (String) imageText.get("#text");
-
-		return text; 
+		JSONObject smallImage = (JSONObject) image.get(0);
+//		JSONObject largeImage = (JSONObject) image.get(3);
+		smallText = (String) smallImage.get("#text");
+//		largeText = (String) largeImage.get("#text");
+		
+		
+//		List<String> imageArray = new ArrayList<>();
+//		
+//		imageArray.add(smallText);
+//		imageArray.add(largeText);
+		
+		
+		return smallText; 
 		
 		}catch(Exception e){
 			// TODO Auto-generated catch block

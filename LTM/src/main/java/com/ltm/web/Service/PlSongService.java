@@ -46,12 +46,4 @@ public class PlSongService {
 				.orElseThrow(EntityNotFoundException::new);
 	}
 	
-//	public Song getSong(Long id) {
-//		Optional<Song> song = this.songRepository.findById(id);
-//		if(song.isPresent()) {
-//			return song.get();
-//		}else {
-//			throw new DataNotFoundException("song not found");
-//		}
-//	}
 }

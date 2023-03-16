@@ -34,4 +34,11 @@ public interface PlayListRepository extends JpaRepository<PlayList, Long> {
 	//노래 넣을때 회원 id를 가진 플레이리스트 목록 조회
 	@Query(value = "select * from play_list p where p.id = :id",nativeQuery=true)
 	List<PlayList> findMemberPlayList(@Param("id") String memberId);
+	
+//	//첫번째 노래 이미지를 플레이리스트 이미지로 넣어주기
+//	@Query(value = "select ps.image"
+//			+ " from pl_song ps"
+//			+ " where ps.pl_id = :id"
+//			+ " limit 1;",nativeQuery=true)
+//	String findPlayListImage(@Param("id") Long plId);
 }
