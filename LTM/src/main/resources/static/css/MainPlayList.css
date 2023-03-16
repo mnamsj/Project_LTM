@@ -1,9 +1,13 @@
 @charset "UTF-8";
 
+.iconheader{
+	margin: 20px 40px;
+}
+
 .addimage{
 	position: absolute;
-	width: 30px;
-	height: 30px;
+	width: 40px;
+	height: 40px;
 }
 
 .search {
@@ -46,12 +50,12 @@ li {
 	position: relative;
 	width: 80%;
 	margin: 10px auto;
-	border: 1px solid #000000;
 }
 
 .plimage {
 	width: 100%;
 	vertical-align: middle;
+	border-radius: 30px;
 }
 
 .titletext {
