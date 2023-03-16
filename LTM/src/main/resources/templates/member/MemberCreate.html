@@ -32,10 +32,10 @@
                     <div class="signup-form">
                         <h2 class="form-title">Sign up</h2>
                         <form th:action="@{/member/create}" th:object="${memberFormDto}" method="POST" class="register-form" id="register-form">
-                            <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="fieldError">Incorrect data</p>
+                            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="fieldError">Incorrect data</p>
                             <div class="form-group">
-                                <label for="id"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" th:field="*{id}" placeholder="아이디"/>
+                                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" th:field="*{username}" placeholder="아이디"/>
                             </div>
                             <p th:if="${#fields.hasErrors('password1')}" th:errors="*{password1}" class="fieldError">Incorrect data</p>
                             <div class="form-group">
@@ -47,11 +47,11 @@
                                 <label for="password2"><i class="zmdi zmdi-lock-outline"></i></label>
                                 <input type="password" th:field="*{password2}" placeholder="비밀번호 확인"/>
                             </div>
-                            <p th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" class="fieldError">Incorrect data</p>
+                           <!--  <p th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" class="fieldError">Incorrect data</p>
                             <div class="form-group">
                                 <label for="id"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" th:field="*{nickname}" placeholder="닉네임"/>
-                            </div>
+                            </div> -->
                             <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect data</p>
 							<div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>

@@ -9,12 +9,12 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 @Controller
 public class MainController {
 	
-	@GetMapping("/")
+	@GetMapping("/main")
 	public String root() {
 		
 		return "main/main"; 
 	}
-	@GetMapping("/door")
+	@GetMapping("/")
 	public String door() {
 		
 		return "main/door"; 

@@ -28,12 +28,12 @@ public class SecurityConfig {
 		.and()
 			.formLogin()
 			.loginPage("/member/login")
-			.defaultSuccessUrl("/")
+			.defaultSuccessUrl("/main")
 			
 		.and() //2023-02-27 추가
             .logout()
             .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-            .logoutSuccessUrl("/")
+            .logoutSuccessUrl("/main")
             .invalidateHttpSession(true)	
 			
          .and() //2023-03-14 추가 csrf토큰 안넣어도 됨.

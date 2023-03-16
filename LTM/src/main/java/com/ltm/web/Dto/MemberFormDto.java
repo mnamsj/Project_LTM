@@ -19,7 +19,7 @@ import lombok.Setter;
 public class MemberFormDto {
 	@Size(min=4, max=12, message = "아이디는 4~12자 이내로 작성해 주세요.")
 	@NotEmpty(message = "사용자 id는 필수 항목입니다.")
-	private String id;
+	private String username;
 	
 	@Size(min=8, max=30, message = "비밀번호는 8~30자 이내로 작성해 주세요.")
 	@NotEmpty(message = "비밀번호는 필수 항목입니다.")
@@ -42,8 +42,8 @@ public class MemberFormDto {
 	@NotEmpty(message="비밀번호가 서로 같지 않습니다.")
 	private String passvali;
 	
-	@NotEmpty(message = "닉네임은 필수 항목입니다.")
-	private String nickname;
+//	@NotEmpty(message = "닉네임은 필수 항목입니다.")
+//	private String nickname;
 	
 	@Email
 	@NotEmpty(message = "이메일은 필수 항목입니다.")

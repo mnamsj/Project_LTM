@@ -23,11 +23,12 @@ public class MemberService {
 	private final MemberRepository memberRepository;
 	private final PasswordEncoder passwordEncoder;
 	
-	public Member create(String id, String password, String nickname, String email, String phone, String birth, LocalDateTime joindate, MemberRole role) {
+	public Member create(String username, String password,
+			/* String nickname, */ String email, String phone, String birth, LocalDateTime joindate, MemberRole role) {
 		Member member = new Member();
-		member.setId(id);
+		member.setUsername(username);
 		member.setPassword(passwordEncoder.encode(password));
-		member.setNickname(nickname);
+//		member.setNickname(nickname);
 		member.setEmail(email);
 		member.setPhone(phone);
 		member.setBirth(birth); 
@@ -39,8 +40,8 @@ public class MemberService {
 	
 	
 	// member 조회 (2023-02-27)
-	public Member getMember(String id) {
-		Optional<Member> member = this.memberRepository.findByid(id);
+	public Member getMember(String username) {
+		Optional<Member> member = this.memberRepository.findByUsername(username);
 		if(member.isPresent()) {
 			return member.get();
 		} else {

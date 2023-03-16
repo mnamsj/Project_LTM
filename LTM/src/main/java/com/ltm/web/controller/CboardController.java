@@ -122,7 +122,7 @@ public class CboardController {
 		public String cboardModify(CboardFormDto cboardForm, @PathVariable("id") Integer id,
 				Principal principal) {
 			Cboard cboard = this.cboardService.getCboard(id);
-			if(!cboard.getNickname().getId().equals(principal.getName())) {
+			if(!cboard.getNickname().getUsername().equals(principal.getName())) {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
 			}
 			cboardForm.setCtitle(cboard.getCtitle());
@@ -140,7 +140,7 @@ public class CboardController {
 				return "cboard/cboard_form";
 			}
 			Cboard cboard = this.cboardService.getCboard(id);
-			if(!cboard.getNickname().getId().equals(principal.getName())) {
+			if(!cboard.getNickname().getUsername().equals(principal.getName())) {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"수정권한이 없습니다.");
 			}
 			this.cboardService.modify(cboard, cboardForm.getCtitle(), cboardForm.getCbody(), cboardForm.getTags());
@@ -152,7 +152,7 @@ public class CboardController {
 		@GetMapping("/delete/{id}")
 		public String cboardDelete(Principal principal, @PathVariable("id") Integer id) {
 			Cboard cboard = this.cboardService.getCboard(id);
-			if(!cboard.getNickname().getId().equals(principal.getName())) {
+			if(!cboard.getNickname().getUsername().equals(principal.getName())) {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
 			}
 		
