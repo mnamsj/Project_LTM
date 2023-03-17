@@ -58,7 +58,7 @@ public class MemberController {
 			bindingResult.reject("signupFailed", e.getMessage());
 			return "member/MemberCreate";
 		}
-		return "redirect:/main";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/login")

@@ -16,19 +16,19 @@
          <ul style="padding-left: 0;">
             <li>
                <div>
-                  <div style="width: 60%; float: left; border-top: 1px solid black; font-size: x-large;">[[${cboard.ctitle}]]</div>
-                  <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid black; padding-top: 8px">[[${#temporals.format(cboard.wdate, 'yyyy.MM.dd HH:mm')}]]</div>
+                  <div style="width: 60%; float: left; border-top: 1px solid #e9e9e9; font-size: x-large;">[[${cboard.ctitle}]]</div>
+                  <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid #e9e9e9; padding-top: 8px">[[${#temporals.format(cboard.wdate, 'yyyy.MM.dd HH:mm')}]]</div>
                </div>
             </li>
          <li  th:if="${cboard.username != null}">
             <div>
-               <div style="width: 60%; float: left; border-top: 1px solid black;">[[${cboard.username.id}]]</div>
-               <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid black; padding-top: 3px">조회수 [[${cboard.view}]] 추천 [[${#lists.size(cboard.voter)}]] 댓글 [[${#lists.size(cboard.replyList)}]]</div>      
+               <div style="width: 60%; float: left; border-top: 1px solid #e9e9e9;">[[${cboard.username.username}]]</div>
+               <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid #e9e9e9; padding-top: 3px">조회수 [[${cboard.view}]] 추천 [[${#lists.size(cboard.voter)}]] 댓글 [[${#lists.size(cboard.replyList)}]]</div>      
             </div>
          </li>
          <li>
-            <div style="border-bottom: 1px solid black;">
-               <div style="width: 1110px; height: 400px; text-align: left; float: left; border-top: 1px solid black;" th:utext="${cboard.cbody}"></div>
+            <div style="border-bottom: 1px solid #e9e9e9;">
+               <div style="width: 1110px; height: 400px; text-align: left; float: left; border-top: 1px solid #e9e9e9;" th:utext="${cboard.cbody}"></div>
             </div>
          </li>         
             <li>
@@ -37,7 +37,7 @@
                </div>
             </li>
             <li>
-               <div style="border-bottom: 1px solid black;">
+               <div style="border-bottom: 1px solid #e9e9e9;">
                   <div style="text-align: center;">
                      <a href="javascript:void(0);" class="recommend" th:data-uri="@{|/cboard/vote/${cboard.id}|}">
                         <i class="bi bi-heart">
@@ -49,15 +49,15 @@
             </li>
             <li>
                <div>
-                  <div style="text-align: center; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid black;">
+                  <div style="text-align: center; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #e9e9e9;">
                      <a class="btn btn-light" th:href="@{|/cboard/list|}" style="width: 300px;">목록으로</a>
                   </div>
-                  <div style="text-align: right; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid black;">
+                  <div style="text-align: right; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #e9e9e9;">
                      <a class="btn btn-light" th:href="@{|/cboard/mdate/${cboard.id}|}" th:text="수정" sec:authorize="isAuthenticated()"
-                     	th:if="${cboard.username != null and #authentication.getPrincipal().getUsername() == cboard.username.id}"></a>
+                     	th:if="${cboard.username != null and #authentication.getPrincipal().getUsername() == cboard.username.username}"></a>
                      		<!-- 가독성을 위한 공백 -->
                      <a href="javascript:void(0);" class="delete btn btn-light" th:data-uri="@{|/cboard/delete/${cboard.id}|}" sec:authorize="isAuthenticated()"
-                     	th:if="${cboard.username != null and #authentication.getPrincipal().getUsername() == cboard.username.id}" th:text="삭제"></a>
+                     	th:if="${cboard.username != null and #authentication.getPrincipal().getUsername() == cboard.username.username}" th:text="삭제"></a>
                   </div>
                </div>
             </li>
@@ -68,13 +68,13 @@
             </li>
             <li>	<!-- 댓글 -->
                <div th:each="reply, loop : ${paging}" th:if="${cboard.id == reply.cboard.id}">
-                  <div style="width: 80%; float: left; border-bottom: 1px solid black; padding-top: 10px">
-                     <span th:if="${reply.username != null}" th:text="${reply.username.id}"></span> 
+                  <div style="width: 80%; float: left; border-bottom: 1px solid #e9e9e9; padding-top: 10px;height: 82.33333px;">
+                     <span th:if="${reply.username != null}" th:text="${reply.username.username}"></span> 
                      <span style="color: gray;" th:if="${reply.mdate == null}">[[${#temporals.format(reply.wdate, 'yyyy.MM.dd HH:mm')}]]</span>
                      <p>[[${reply.rbody}]]</p>
                   </div>
                   <div>
-                     <div style="width: 10%; float: left; text-align: right; padding-top: 28px; border-bottom: 1px solid black; height: 81px">
+                     <div style="width: 10%; float: left; text-align: right; padding-top: 28px; border-bottom: 1px solid #e9e9e9; height: 82.33333px;">
                         <a class="recommend" th:data-uri="@{|/reply/vote/${reply.id}|}">
                            <i class="bi bi-hand-thumbs-up">
                               <span th:text="${#lists.size(reply.voter)}"></span>
@@ -82,8 +82,8 @@
                         </a>
                      </div>
                      <div>
-                        <div style="width: 10%; float: left; text-align: right; padding-top: 20px; border-bottom: 1px solid black; height: 81px">
-                           <a href="javascript:void(0);" th:data-uri="@{|/reply/delete/${reply.id}|}" class="deleteR btn btn-light" sec:authorize="isAuthenticated()" th:if="${reply.username != null and #authentication.getPrincipal().getUsername() == reply.username.id}" th:text="삭제"></a>
+                        <div style="width: 10%; float: left; text-align: right; padding-top: 20px; border-bottom: 1px solid #e9e9e9; height: 82.33333px;">
+                           <a href="javascript:void(0);" th:data-uri="@{|/reply/delete/${reply.id}|}" class="deleteR btn btn-light" sec:authorize="isAuthenticated()" th:if="${reply.username != null and #authentication.getPrincipal().getUsername() == reply.username.username}" th:text="삭제"></a>
                         </div>
                      </div>
                   </div>
@@ -91,7 +91,7 @@
             </li>      
          </ul>   
       </div>	<!-- 댓글 페이징 -->
-      <div th:if="${paging}" aria-label="Page navigation example" style="float: left; padding-top: 10px;">
+      <div th:if="${paging}" aria-label="Page navigation example" style="float: left; padding-top: 10px; padding-left: 495px">
 		<ul style="list-style: none;" class="pagination">
 			<li class="page-item" th:classappend="${!paging.hasPrevious}? 'disabled'">
 				<a class="page-link" th:href="@{|?page=${paging.number-1}|}">
@@ -110,7 +110,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="card" style="float: left; margin-top: 10px">
+	<div class="card" style="float: left; margin-top: 10px; margin-left: 100px">
 		<div class="card-header">댓글 쓰기</div>
 			<div class="card-body">
 				<form th:action="@{|/reply/create/${id}|}" th:object="${replyFormDto}" method="post">
