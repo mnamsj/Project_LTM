@@ -3,3 +3,10 @@
     --bs-pagination-active-bg: #ced4da;
     --bs-pagination-active-border-color: #ced4da;
 }
+
+.active>.page-link, .page-link.active {
+    z-index: 3;
+    color: var(--bs-pagination-active-color);
+    background-color: #ced4da;
+    border-color: #ced4da;
+}

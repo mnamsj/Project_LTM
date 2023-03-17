@@ -16,19 +16,19 @@
          <ul style="padding-left: 0;">
             <li>
                <div>
-                  <div style="width: 60%; float: left; border-top: 1px solid black; font-size: x-large;">[[${adboard.adtitle}]]</div>
-                  <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid black; padding-top: 8px">[[${#temporals.format(adboard.wdate, 'yyyy.MM.dd HH:mm')}]]</div>
+                  <div style="width: 60%; float: left; border-top: 1px solid #e9e9e9; font-size: x-large;">[[${adboard.adtitle}]]</div>
+                  <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid #e9e9e9; padding-top: 8px">[[${#temporals.format(adboard.wdate, 'yyyy.MM.dd HH:mm')}]]</div>
                </div>
             </li>
          <li  th:if="${adboard.username != null}">
             <div>
-               <div style="width: 60%; float: left; border-top: 1px solid black;">[[${adboard.username.id}]]</div>
-               <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid black; padding-top: 3px">조회수 [[${adboard.view}]]</div>      
+               <div style="width: 60%; float: left; border-top: 1px solid #e9e9e9;">[[${adboard.username.username}]]</div>
+               <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid #e9e9e9; padding-top: 3px">조회수 [[${adboard.view}]]</div>      
             </div>
          </li>
          <li>
-            <div style="border-bottom: 1px solid black;">
-               <div style="width: 1110px; height: 400px; text-align: left; float: left; border-top: 1px solid black;" th:utext="${adboard.adbody}"></div>
+            <div style="border-bottom: 1px solid #e9e9e9;">
+               <div style="width: 1110px; height: 400px; text-align: left; float: left; border-top: 1px solid #e9e9e9;" th:utext="${adboard.adbody}"></div>
             </div>
          </li>         
             <li>
@@ -38,15 +38,15 @@
             </li>
             <li>
                <div>
-                  <div style="text-align: center; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid black;">
+                  <div style="text-align: center; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #e9e9e9;">
                      <a class="btn btn-light" th:href="@{|/adboard/list|}" style="width: 300px;">목록으로</a>
                   </div>
-                  <div style="text-align: right; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid black;">
+                  <div style="text-align: right; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #e9e9e9;">
                      <a class="btn btn-light" th:href="@{|/adboard/mdate/${adboard.id}|}" th:text="수정" sec:authorize="isAuthenticated()"
-                     	th:if="${adboard.username != null and #authentication.getPrincipal().getUsername() == adboard.username.id}"></a>
+                     	th:if="${adboard.username != null and #authentication.getPrincipal().getUsername() == adboard.username.username}"></a>
                      		<!-- 가독성을 위한 공백 -->
                      <a href="javascript:void(0);" class="delete btn btn-light" th:data-uri="@{|/adboard/delete/${adboard.id}|}" sec:authorize="isAuthenticated()"
-                     	th:if="${adboard.username != null and #authentication.getPrincipal().getUsername() == adboard.username.id}" th:text="삭제"></a>
+                     	th:if="${adboard.username != null and #authentication.getPrincipal().getUsername() == adboard.username.username}" th:text="삭제"></a>
                   </div>
                </div>
             </li>     

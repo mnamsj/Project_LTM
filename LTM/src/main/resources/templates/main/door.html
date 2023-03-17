@@ -41,6 +41,7 @@
     }
     .modal {
     --bs-modal-width: 1001px;
+    --bs-modal-border-radius: 100rem;
 	}
 	.doorfont{
 		font-family: 'East Sea Dokdo';
@@ -91,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	</div>
 <!-- 모달 시작 -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-	style="margin-top: 150px; margin-right: 100px">
+	style="margin-top: 150px; margin-right: 100px;">
       <div class="modal-dialog" style="width: 1001px;">
         <div class="modal-content">
           <th:block th:replace="~{/member/login_form :: loginForm}"></th:block>

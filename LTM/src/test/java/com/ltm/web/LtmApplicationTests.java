@@ -14,7 +14,7 @@ class LtmApplicationTests {
 	
 	 @Test
      void 게시글_생성() {
-         for (int i = 1; i <= 60; i++) {
+         for (int i = 1; i <= 240; i++) {
              String ctitle = String.format("테스트 데이터입니다:[%03d]", i);
              String cbody = "내용무";
              String tags = "아무노래";
