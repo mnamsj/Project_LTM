@@ -40,7 +40,7 @@ public class PlayList {
 	private WishList wishList;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "idNum")
 	private Member member;
 	
 	@OneToMany(mappedBy = "playList", cascade = CascadeType.REMOVE, orphanRemoval = true)

@@ -77,7 +77,7 @@ public class PlayListService {
 //	}
 
 	// 내 플레이리스트 조회 + 노래 넣을 플레이리스트 목록 조회
-	public List<PlayList> findMemberPl(String memberId) {
+	public List<PlayList> findMemberPl(Integer memberId) {
 		return playListRepository.findMemberPlayList(memberId);
 	}
 

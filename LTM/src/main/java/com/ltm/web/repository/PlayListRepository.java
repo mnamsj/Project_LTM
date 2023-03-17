@@ -32,8 +32,8 @@ public interface PlayListRepository extends JpaRepository<PlayList, Long> {
 	Page<PlayList> findByKeyword(@Param("kw") String kw, Pageable pageable);
 	
 	//노래 넣을때 회원 id를 가진 플레이리스트 목록 조회
-	@Query(value = "select * from play_list p where p.id = :id",nativeQuery=true)
-	List<PlayList> findMemberPlayList(@Param("id") String memberId);
+	@Query(value = "select * from play_list p where p.id_num = :id",nativeQuery=true)
+	List<PlayList> findMemberPlayList(@Param("id") Integer memberId);
 	
 //	//첫번째 노래 이미지를 플레이리스트 이미지로 넣어주기
 //	@Query(value = "select ps.image"

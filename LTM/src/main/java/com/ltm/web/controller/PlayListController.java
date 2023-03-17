@@ -68,15 +68,17 @@ public class PlayListController {
 
 		
 		playListService.savePl(playList);
-		return "redirect:/";
+		return "redirect:/main";
 	}
 
-	// 업데이트할 리스트 목록
+	// 내 플레이리스트 목록
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/mylist")
 	public String showAll(Model model, Principal principal) {
 
-		List<PlayList> myList = playListService.findMemberPl(principal.getName());
+		Member member = this.memberService.getMember(principal.getName());
+		
+		List<PlayList> myList = playListService.findMemberPl(member.getIdNum());
 
 		model.addAttribute("mylist", myList);
 
@@ -166,7 +168,7 @@ public class PlayListController {
 		Member member = this.memberService.getMember(principal.getName());
 
 		//내 플레이리스트 조회
-		List<PlayList> myPlayList = playListService.findMemberPl(member.getUsername());
+		List<PlayList> myPlayList = playListService.findMemberPl(member.getIdNum());
 	
 		model.addAttribute("myList", myPlayList);
 		model.addAttribute("Title", songTitle);

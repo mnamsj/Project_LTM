@@ -49,4 +49,14 @@ public class MemberService {
 		}
 	}
 	
+	//플레이리스, 위시리스트 조회할때 사용되는 회원넘버
+	public Member getMemberId(Integer idNum) {
+		Optional<Member> member = this.memberRepository.findByIdNum(idNum);
+		if(member.isPresent()) {
+			return member.get();
+		} else {
+			throw new DataNotFoundException("member not found");
+		}
+	}
+	
 }

@@ -35,10 +35,10 @@
 					<!-- <p th:text="${Playlist.nickname}"></p> -->
 					<a th:href="@{/playlist/{id}/song (id=${Playlist.id})}">
 						<span class="titletext" th:text="${Playlist.title}"></span>
-						<img class="plimage1" th:src="${Playlist.image}">
-						<img class="plimage2" th:if="${Playlist.image == null}" src="/img/nullsongimg.png">
+						<img class="plimage1" th:if="${Playlist.image != null}" th:src="${Playlist.image}">
+						<img class="plimage2" th:unless="${Playlist.image != null}" src="/img/nullsongimg.png">
 					</a>
-						<span class="idtext" th:text="${Playlist.member.id}"></span>
+						<span class="idtext" th:text="${Playlist.member.username}"></span>
 <!-- 					<a sec:authorize="isAuthenticated()" th:onclick="wishlist('[[${Playlist.id}]]')">
 						<span class="idtext">
 							좋아요

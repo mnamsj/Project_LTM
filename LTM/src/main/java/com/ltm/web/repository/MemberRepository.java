@@ -10,4 +10,5 @@ import com.ltm.web.entity.Member;
 public interface MemberRepository extends JpaRepository<Member, Integer>{
 	Optional<Member> findByUsername(String username);
 	
+	Optional<Member> findByIdNum(Integer idNum);
 }

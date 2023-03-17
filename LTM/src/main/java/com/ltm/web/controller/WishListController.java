@@ -29,7 +29,7 @@ public class WishListController {
 		//로그인된 회원 조회
 		Member member = this.memberService.getMember(principal.getName());
 
-		wishListService.saveWishList(member.getUsername(), plId);
+		wishListService.saveWishList(member.getIdNum(), plId);
 		
 		return "redirect:/"; 
 	}

@@ -26,7 +26,7 @@ public class WishList {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "idNum")
 	private Member member;
 
 	@OneToOne(fetch = FetchType.LAZY)

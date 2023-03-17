@@ -24,13 +24,13 @@ public class WishListService {
 	private final PlayListService playListService;
 	private final MemberService memberService;
 	
-	public WishList saveWishList(String memberId, Long plId) {
+	public WishList saveWishList(Integer memberId, Long plId) {
 		
 		//플레이리스트 조회
 		PlayList selectPlayList = playListService.findOne(plId);
 		
 		//회원 조회
-		Member selectMemeber = memberService.getMember(memberId);
+		Member selectMemeber = memberService.getMemberId(memberId);
 		
 		//위시리스트에 넣어주기. 준영속
 		WishList saveWishList = WishList.createWishList(selectPlayList, selectMemeber);
@@ -40,7 +40,7 @@ public class WishListService {
 	}
 	
 	//위시리스트 조회
-	public List<WishList> findPlSongs(String memberId){
+	public List<WishList> findPlSongs(Integer memberId){
 		return wishListRepository.findWishList(memberId);
 	}
 	
