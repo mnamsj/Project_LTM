@@ -12,7 +12,7 @@
             <div class="main-menu h-100">
               <nav class="navbar h-100 navbar-expand-lg">
                 <!-- Logo Area  -->
-                <a class="navbar-brand" th:href="@{/}">
+                <a class="navbar-brand" th:href="@{/main}">
                   <img src="/img/logo5.png" alt="Logo"/>
                 </a>
 
@@ -33,7 +33,7 @@
                   <ul class="navbar-nav ml-auto">
                   <a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/member/login}">관리자페이지</a>
                     <li class="nav-item active">
-                      <a class="nav-link" th:href="@{/}"
+                      <a class="nav-link" th:href="@{/main}"
                         >Home <span class="sr-only">(current)</span></a
                       >
                     </li>

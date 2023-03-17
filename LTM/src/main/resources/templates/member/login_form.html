@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org" 
-	  layout:decorate="~{layout}"
+	  
 	  lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,25 +9,71 @@
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="/fonts/material-icon/css/material-design-iconic-font.min.css">
-
+	<link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
     <!-- Main css -->
     <link rel="stylesheet" href="/css/login.css">
+    
+    <!-- 물결 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
+<style>
+	html,body{
+		background-image:url('/images/Door.png');
+		
+		background-repeat: no-repeat;
+		background-size: cover;
+		height:100%;
+		margin:0;
+		padding: 0;/* 물결 */
+		
+		/* font-family: 'East Sea Dokdo', cursive; */
+		opacity: 1;
+      	transition-duration: 3s;
+      	transition-property: opacity;
+      	/* filter:blur(5px) */
+	}
+	.full-landing-image {/* 물결 */
+         width: 100%;
+         height: 100vh;
+         background: url('/images/Door.png') no-repeat center; /* css 이미지 url */
+         
+         background-size: cover;
+         background-color:black;
+      }
+	body.fade {
+      opacity: 0.5;
+    }
+    .modal {
+    --bs-modal-width: 1001px;
+}
+
+</style>
+<title>LTM</title>
 </head>
 <body>
 
-    <div class="main" layout:fragment="content">
+<!-- 물결 효과를 적용할 이미지 -->
+<div class="full-landing-image">
+             
+	<th:block th:fragment="loginForm">
+    
         <!-- Sing in  Form -->
-        <section class="sign-in">
+        <section class="sign-in" style="padding-top: 150px">
             <div class="container">
                 <div class="signin-content">
                     <div class="signin-image">
                         <figure><img src="/images/signin-image.jpg" alt="sing up image"></figure>
-                        <a class="signup-image-link">Listen to My PlayList.</a>
+                        <a style="font-size: 15px; display: block; text-align: center; text-decoration:none; ">Listen to My PlayList.</a>
                     </div>
 
                     <div class="signin-form">
                         <h2 class="form-title">Login</h2>
                         <form method="POST" th:action="@{/member/login}" class="register-form" id="login-form">
+                        <div th:if="${param.error}">
+            				<div style="color: red;">
+                				아이디 또는 비밀번호를 확인해 주세요.
+            				</div>
+        				</div>
                             <div class="form-group">
                                 <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" name="username" id="username" placeholder="아이디"/>
@@ -59,11 +105,17 @@
                 </div>
             </div>
         </section>
-
-    </div>
-
+    
+	</th:block>
+	</div>
+	<script>	
+		$(".full-landing-image").ripples({
+		resolution: 256, // 렌더링 값이 클수록 잔물결 효과가 느리게 전파
+		perturbance: 0.04, // 잔물경 굴절 강도. 0은 굴절 없음
+		});
+	</script>
     <!-- JS -->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/js/login.js"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+    <!-- <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/js/login.js"></script> -->
+</body>
 </html>

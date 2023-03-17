@@ -40,25 +40,25 @@ public class MemberController {
 		if(bindingResult.hasErrors()) {
 			return "member/MemberCreate";
 		}
-		if(!memberFormDto.getPassword1().equals(memberFormDto.getPassword2())) {
-			bindingResult.rejectValue("password2", "passwordInCorrect", "2개의 패스워드가 일치하지 않습니다.");
-			return "member/MemberCreate";
-		}
+//		if(!memberFormDto.getPassword1().equals(memberFormDto.getPassword2())) {
+//			bindingResult.rejectValue("password2", "passwordInCorrect", "2개의 패스워드가 일치하지 않습니다.");
+//			return "member/MemberCreate";
+//		}
 		try {
-		memberService.create(memberFormDto.getId(), memberFormDto.getPassword1(), 
-				memberFormDto.getNickname(), memberFormDto.getEmail(),
+		memberService.create(memberFormDto.getUsername(), memberFormDto.getPassword1(), 
+				memberFormDto.getEmail(),
 				memberFormDto.getPhone(),
 				memberFormDto.getBirth(), memberFormDto.getJoindate(), memberFormDto.getRole());
 		} catch(DataIntegrityViolationException e) {
 			e.printStackTrace();
-			bindingResult.rejectValue("signupFailed", "아이디, 닉네임 혹은 이메일이 이미 사용중 입니다.");
+			bindingResult.rejectValue("username", "signupFailed", "입력하신 아이디는 이미 사용중 입니다.");
 			return "member/MemberCreate";
 		} catch(Exception e) {
 			e.printStackTrace();
 			bindingResult.reject("signupFailed", e.getMessage());
 			return "member/MemberCreate";
 		}
-		return "redirect:/";
+		return "redirect:/main";
 	}
 	
 	@GetMapping("/login")

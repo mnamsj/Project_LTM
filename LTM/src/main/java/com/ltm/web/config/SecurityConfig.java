@@ -28,7 +28,7 @@ public class SecurityConfig {
 		.and()
 			.formLogin()
 			.loginPage("/member/login")
-			.defaultSuccessUrl("/")
+			.defaultSuccessUrl("/main")
 			
 		.and() //2023-02-27 추가
             .logout()

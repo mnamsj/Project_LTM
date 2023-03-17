@@ -166,7 +166,7 @@ public class PlayListController {
 		Member member = this.memberService.getMember(principal.getName());
 
 		//내 플레이리스트 조회
-		List<PlayList> myPlayList = playListService.findMemberPl(member.getId());
+		List<PlayList> myPlayList = playListService.findMemberPl(member.getUsername());
 	
 		model.addAttribute("myList", myPlayList);
 		model.addAttribute("Title", songTitle);

@@ -3,11 +3,18 @@
 	  lang="en">
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<!-- Font Icon -->
+<link rel="stylesheet" href="/fonts/material-icon/css/material-design-iconic-font.min.css">
+<!-- 로그인 css -->
+<link rel="stylesheet" href="/css/login.css">
+<title>LTM</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
+<!-- 물결 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
 <style>
 	html,body{
 		background-image:url('/images/Door.png');
@@ -15,22 +22,33 @@
 		background-size: cover;
 		height:100%;
 		margin:0;
-		overflow:hidden;
-		font-family: 'East Sea Dokdo', cursive;
+		padding: 0;/* 물결 */
+		
+		/* font-family: 'East Sea Dokdo', cursive; */
 		opacity: 1;
       	transition-duration: 3s;
       	transition-property: opacity;
       	/* filter:blur(5px) */
 	}
+	.full-landing-image {/* 물결 */
+         width: 100%;
+         height: 100vh;
+         background: url('/images/Door.png') no-repeat center; /* css 이미지 url */
+         background-size: cover;
+      }
 	body.fade {
       opacity: 0;
     }
+    .modal {
+    --bs-modal-width: 1001px;
+	}
+	.doorfont{
+		font-family: 'East Sea Dokdo';
+		font-size: 5em;
+		color: darkgray;
+	}
 </style>
 <script type="text/javascript">
-var link = '/member/login'
-function login(){
-	location.href=link;
-}
 document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(() => {
       document.body.classList.remove('fade');
@@ -39,8 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </head>
 <body class="fade">
+
 <div class="position-absolute top-50 start-50 translate-middle">
-<a style="font-size: 5em; color: darkgray">Listen to My PlayList. LTM</a>
+<a class="doorfont">Listen to My PlayList. LTM</a>
 	</div>
 	<!-- <div>
 		<a style="font-size: 14em; color: darkgray">L</a>
@@ -54,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		<a style="font-size: 14em; color: darkgray">M</a>
 		<a style="font-size: 7em; color: darkgray">y PlayList.</a></div>
 	</div> -->
-<div style="width:100%; height:100%; "> <!-- onclick='login()' -->
+<div style="width:100%; height:100%;" onclick='login()'> <!-- onclick='login()' -->
 <!-- <section class="sign-in">
             <div class="container">
                 <div class="signin-content">
@@ -62,41 +81,45 @@ document.addEventListener('DOMContentLoaded', () => {
                         <figure><img src="/images/signin-image.jpg" alt="sing up image"></figure>
                         <a class="signup-image-link">Listen to My PlayList.</a>
                     </div>
+=======
+>>>>>>> de7f3821601ea139d9d6b9113b60cc0c9ab5fa11
 
-                    <div class="signin-form">
-                        <h2 class="form-title">Login</h2>
-                        <form method="POST" th:action="@{/member/login}" class="register-form" id="login-form">
-                            <div class="form-group">
-                                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="username" id="username" placeholder="아이디"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="password" id="password" placeholder="비밀번호"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
-                                <label for="remember-me" class="label-agree-term"><span><span></span></span>로그인 상태 유지</label>
-                            </div>
-                            <div class="form-group form-button" style="margin-left:15px">
-                                <input type="submit" name="signin" id="signin" class="form-submit" value="로그인"/>
-                                <input type="button" name="signin" id="signin" class="form-submit" value="회원가입" 
-                                	   style="margin-left:15px; padding-left:32px; padding-right:32px;"
-                                	   th:onclick="|location.href='@{/member/create}'|"/>
-                            </div>
-                        </form>
-                        <div class="social-login">
-                            <span class="social-label">Or login with</span>
-                            <ul class="socials">
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
+<!-- 물결 효과를 적용할 이미지 -->
+<div class="full-landing-image"></div>
+	<div class="position-absolute top-50 start-50 translate-middle">
+			<a class="nav-link doorfont" href="#loginModal" data-toggle="modal" style="font-size: 5em; color: darkgray" >Listen to My PlayList. LTM</a>
+	</div>
+<!-- 모달 시작 -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+	style="margin-top: 150px; margin-right: 100px">
+      <div class="modal-dialog" style="width: 1001px;">
+        <div class="modal-content">
+          <th:block th:replace="~{/member/login_form :: loginForm}"></th:block>
+          </div>
         </div>
+      </div>
+	<script>	
+		$(".full-landing-image").ripples({
+		resolution: 256, // 렌더링 값이 클수록 잔물결 효과가 느리게 전파
+		perturbance: 0.04, // 잔물경 굴절 강도. 0은 굴절 없음
+		});
+	</script>
+	<!-- 모달 자바스크립트 -->
+	<script type="text/javascript">
+		var myModal = new bootstrap.Modal(document.getElementById("loginModal"), {});
+		document.onreadystatechange = function () {
+		myModal.show();
+		};
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+		integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+		crossorigin="anonymous">
+	</script>
+	<script src="./app.js"></script>
+	<!-- 모달 스크립트 끝 -->
 </body>
 </html>
