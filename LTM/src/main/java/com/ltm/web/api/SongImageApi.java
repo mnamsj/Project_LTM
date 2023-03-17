@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SongImageApi {
 	
-	public String getImage(String songTitle, String singer){
+	public List<String> getImage(String songTitle, String singer){
 
 	// 인증키
 	String apiKey = "e63d38bc9de5863a4bbdfa74a087ea38";
@@ -71,24 +71,30 @@ public class SongImageApi {
 		JSONObject track = (JSONObject) obj.get("track");
 		JSONObject album = (JSONObject) track.get("album");
 
-		JSONArray image = (JSONArray) album.get("image");
-
 		String smallText = "";
-//		String largeText = "";
+		String largeText = "";
+		
+		if(album == null) {	//api에 앨범 태그가 없다면 		
+			smallText = null;
+			largeText = null;
+			
+		}else if(album != null) {
+	
+			JSONArray image = (JSONArray) album.get("image");
 
-		JSONObject smallImage = (JSONObject) image.get(0);
-//		JSONObject largeImage = (JSONObject) image.get(3);
-		smallText = (String) smallImage.get("#text");
-//		largeText = (String) largeImage.get("#text");
+			JSONObject smallImage = (JSONObject) image.get(0);
+			JSONObject largeImage = (JSONObject) image.get(3);
+			smallText = (String) smallImage.get("#text");
+			largeText = (String) largeImage.get("#text");
+		}
+				
+		List<String> imageArray = new ArrayList<>();
+		
+		imageArray.add(smallText);
+		imageArray.add(largeText);
 		
 		
-//		List<String> imageArray = new ArrayList<>();
-//		
-//		imageArray.add(smallText);
-//		imageArray.add(largeText);
-		
-		
-		return smallText; 
+		return imageArray; 
 		
 		}catch(Exception e){
 			// TODO Auto-generated catch block

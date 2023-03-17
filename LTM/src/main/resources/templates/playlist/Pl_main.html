@@ -31,13 +31,12 @@
 		<!-- 플레이리스트 목록 -->
 		<div class="Allplaylist">
 		        <div class="item" th:each="Playlist, PlaylistStatus : ${paging}">
-		        	<!-- <div> -->
-					<img class="plimage" th:if="${Playlist.image != null}" th:src="${Playlist.image}">
-					<img class="plimage" th:unless="${Playlist.image != null}" src="https://cdn.pixabay.com/photo/2020/04/20/09/31/moon-5067423_960_720.jpg">
-					<!-- </div> -->
+		        	
 					<!-- <p th:text="${Playlist.nickname}"></p> -->
 					<a th:href="@{/playlist/{id}/song (id=${Playlist.id})}">
 						<span class="titletext" th:text="${Playlist.title}"></span>
+						<img class="plimage1" th:src="${Playlist.image}">
+						<img class="plimage2" th:if="${Playlist.image == null}" src="/img/nullsongimg.png">
 					</a>
 						<span class="idtext" th:text="${Playlist.member.id}"></span>
 <!-- 					<a sec:authorize="isAuthenticated()" th:onclick="wishlist('[[${Playlist.id}]]')">

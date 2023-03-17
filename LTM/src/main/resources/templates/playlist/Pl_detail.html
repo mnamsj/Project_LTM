@@ -11,7 +11,7 @@
 
 
 		<a th:each="Playlist : ${playList22}">
-		<img th:src="@{/img/} + ${Playlist.image}" />
+		<img th:src="${Playlist.image}" />
 		<a th:text="${Playlist.title}"></a>
 		<a th:text="${Playlist.discription}"></a>
 		<a th:text="${Playlist.id}"></a>
@@ -23,7 +23,10 @@
 			<!-- <img th:src="@{/img/album/} + ${Song.thumbnail}" /> -->
 			<li th:text="${Song.songTitle}"></li>
 			<li th:text="${Song.singer}"></li>
-			<li><img class="songimg" th:src="${Song.image}"></li>
+			<li>
+				<img class="songimg" style="width:40px; height:40px;" th:if="${Song.image != null}" th:src="${Song.image}">
+				<img class="songimg" style="width:40px; height:40px;" th:unless="${Song.image != null}" src="/img/nullsongimg.png">
+			</li>
 			<li sec:authorize="isAuthenticated()"><a href="#"
 					th:onclick="remove('[[${Song.id}]]','[[${Song.playList.id}]]')">삭제</a></li>
 		</ul>

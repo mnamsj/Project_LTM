@@ -50,13 +50,25 @@ li {
 	position: relative;
 	width: 80%;
 	margin: 10px auto;
+	
 }
 
-.plimage {
+.plimage1{
+	position: absolute;
 	width: 100%;
 	vertical-align: middle;
 	border-radius: 30px;
+	background-color: rgba(0,0,0, 0.4);
 }
+
+.plimage2{
+	width: 100%;
+	vertical-align: middle;
+	border-radius: 30px;
+	background-color: rgba(0,0,0, 0.4);
+}
+
+
 
 .titletext {
 	position: absolute;

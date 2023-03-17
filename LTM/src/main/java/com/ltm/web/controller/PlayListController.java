@@ -26,6 +26,7 @@ import com.ltm.web.entity.Member;
 import com.ltm.web.entity.playlist.PlSong;
 import com.ltm.web.entity.playlist.PlayList;
 import com.ltm.web.repository.PlSongRepository;
+import com.ltm.web.repository.PlayListRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -178,16 +179,15 @@ public class PlayListController {
 					        @RequestParam("songTitle") String songTitle,
 					        @RequestParam("singer") String singer) {
 
-		String songImage = songImageApi.getImage(songTitle, singer);		
-		plSongService.plSong(plId, songTitle, singer, songImage);// 담은 노래의 id
+		List<String> songImage = songImageApi.getImage(songTitle, singer);		
+		plSongService.plSong(plId, songTitle, singer, songImage.get(0));// 담은 노래의 id
 		
-//		PlayList playList = playListService.findOne(plId);
-//		if(playList.getImage()==null) {
-//			String plImage = songImage.get(1);
-//			System.out.println("이미지 : " + plImage);
-//			playList.setImage(plImage);
-//			playListService.savePl(playList);
-//		}
+		PlayList playList = playListService.findOne(plId);
+		if(playList.getImage() == null) {
+			String plImage = songImage.get(1);
+			playList.setImage(plImage);
+			playListService.savePl(playList);
+		}
 
 		return "redirect:/search";
 	}
