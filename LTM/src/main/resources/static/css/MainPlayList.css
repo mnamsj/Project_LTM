@@ -54,20 +54,20 @@ li {
 }
 
 .plimage1{
-	position: absolute;
+	
 	width: 100%;
 	vertical-align: middle;
 	border-radius: 30px;
 	background-color: rgba(0,0,0, 0.4);
 }
 
-.plimage2{
-
+/* .plimage2{
+	
 	width: 100%;
 	vertical-align: middle;
 	border-radius: 30px;
 	background-color: rgba(0,0,0, 0.4);
-}
+} */
 
 
 

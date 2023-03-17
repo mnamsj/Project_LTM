@@ -1,4 +1,4 @@
-package com.ltm.web.api;
+package com.ltm.web;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -18,8 +18,13 @@ public class ApiTest {
 
 		// 인증키
 		String apiKey = "e63d38bc9de5863a4bbdfa74a087ea38";
-		String singer = "christian kuria";
-		String songTitle = "Losing you";
+		String singer = "아이유";
+		String songTitle = "NewJeans (뉴진스) 'Tell me (FRNK Remix)'";
+		
+        
+//        for (int i = 0; i < songTitle.length(); i++) {
+//			String songTitle11 = (String) songTitle.get(i).get("text");
+//		}
 
 		String encodeSinger = "";
 		String encodeSongTitle = "";

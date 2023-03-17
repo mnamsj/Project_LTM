@@ -1,5 +1,7 @@
 package com.ltm.web.config;
 
+import java.util.Iterator;
+
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
@@ -13,5 +15,6 @@ public class SpecialWordConfig implements WebServerFactoryCustomizer<TomcatServl
 	        factory.addConnectorCustomizers((TomcatConnectorCustomizer)
 	                connector -> connector.setAttribute("relaxedQueryChars", "<>[\\]^`{|}"));
 	    }
+	
 
 }

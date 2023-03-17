@@ -1,5 +1,6 @@
 package com.ltm.web.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -40,8 +41,16 @@ public class WishListService {
 	}
 	
 	//위시리스트 조회
-	public List<WishList> findPlSongs(Integer memberId){
-		return wishListRepository.findWishList(memberId);
+	public List<PlayList> findWl(Integer memberId){
+		List<Long> selectWl = wishListRepository.findWishList(memberId);
+		
+		List<PlayList> arrayPl = new ArrayList<>();
+		for (int i = 0; i < selectWl.size(); i++) {
+			PlayList pl = playListService.findOne(selectWl.get(i));
+			arrayPl.add(pl);
+		}
+		System.out.println("결과값: " + arrayPl.size());
+		return arrayPl;
 	}
 	
 	

@@ -33,17 +33,20 @@
 		        <div class="item" th:each="Playlist, PlaylistStatus : ${paging}">
 		        	
 					<!-- <p th:text="${Playlist.nickname}"></p> -->
+					
+					
+						<img class="plimage1" th:if="${Playlist.image != null}" th:src="${Playlist.image}">
+						<img class="plimage1" th:unless="${Playlist.image != null}" src="/img/nullsongimg.png">
 					<a th:href="@{/playlist/{id}/song (id=${Playlist.id})}">
 						<span class="titletext" th:text="${Playlist.title}"></span>
-						<img class="plimage1" th:if="${Playlist.image != null}" th:src="${Playlist.image}">
-						<img class="plimage2" th:unless="${Playlist.image != null}" src="/img/nullsongimg.png">
-					</a>
 						<span class="idtext" th:text="${Playlist.member.username}"></span>
-<!-- 					<a sec:authorize="isAuthenticated()" th:onclick="wishlist('[[${Playlist.id}]]')">
+					</a>
+						
+					<a sec:authorize="isAuthenticated()" th:onclick="wishlist('[[${Playlist.id}]]')">
 						<span class="idtext">
 							좋아요
 						</span>					
-					</a> -->
+					</a> 
 				</div>				
 		</div>
 		
@@ -80,7 +83,20 @@
 </div>
 </div>
 
-		<script layout:fragment="script" type='text/javascript'>
+	
+<th:block layout:fragment="script">
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/main/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/main/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/main/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/main/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/main/active.js"></script>
+	
+	<script type='text/javascript'>
 			const page_elements = document.getElementsByClassName("page-link");
 			Array.from(page_elements).forEach(function(element) {
 				element.addEventListener('click', function() {
@@ -111,7 +127,7 @@
 				form.submit();
 			}
 		</script>
-
+</th:block>
 
 </body>
 </html>

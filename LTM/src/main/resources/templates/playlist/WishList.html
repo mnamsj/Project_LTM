@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org" 
+	  layout:decorate="~{layout}"
+	  lang="en">
+<head>
+<link rel="stylesheet" type="text/css" th:href="@{/css/MainPlayList.css}">
+</head>
+<body>
+<div layout:fragment="content" class="blog-area section_padding_100 mt-100">
+	<div class="container">
+		
+
+    <!-- <div class="iconheader">
+	<ul style="display:flex; justify-content: center;">    	
+        	<li style="width: 60%; float: left;">
+            		<a th:href="@{/playlist/new}">
+            			<img class="addimage" src="/img/plusicon.png" alt="">
+            		</a>
+ 	    	</li>
+        	<li style="width: 40%; float: left;">
+            	<div class="input-group" style="width: 100%;">
+                	<input type="text" id="search_kw" class="form-control" th:value="${kw}">
+                	<button class="btn btn-outline-secondary" type="button" id="btn_search">검색</button>
+            	</div>
+        	</li>
+     </ul>    
+    </div> -->
+   
+	<hr style="border-top: 1px solid black; margin: 1rem 35px;">
+
+		<!-- 플레이리스트 목록 -->
+		<div class="Allplaylist">
+		        <div class="item" th:each="lists: ${wishlist}">
+		        	
+					<!-- <p th:text="${Playlist.nickname}"></p> -->
+					
+					
+						<img class="plimage1" th:if="${lists.image != null}" th:src="${lists.image}">
+						<img class="plimage1" th:unless="${lists.image != null}" src="/img/nullsongimg.png">
+					<a th:href="@{/playlist/{id}/song (id=${lists.id})}">
+						<span class="titletext" th:text="${lists.title}"></span>
+						<span class="idtext" th:text="${lists.member.username}"></span>
+					</a>
+						
+
+				</div>				
+		</div>
+		
+		
+</div>
+</div>
+
+	
+<th:block layout:fragment="script">
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/main/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/main/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/main/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/main/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/main/active.js"></script>
+</th:block>
+
+</body>
+</html>

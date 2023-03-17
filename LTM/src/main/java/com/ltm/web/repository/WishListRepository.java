@@ -11,8 +11,6 @@ import com.ltm.web.entity.playlist.WishList;
 public interface WishListRepository extends JpaRepository<WishList, Long>{
 
 	//위시리스트 조회
-	@Query(value = "select *"
-			+ " from wish_list w"
-			+ " where w.id_num = :memberId" , nativeQuery =true)
-	public List<WishList> findWishList(@Param(value = "memberId") Integer memberId);
+	@Query(value = "select w.pl_id from wish_list w where w.id_num = :memberId", nativeQuery =true)
+	public List<Long> findWishList(@Param(value = "memberId") Integer memberId);
 }

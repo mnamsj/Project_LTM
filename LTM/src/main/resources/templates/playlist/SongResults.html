@@ -13,7 +13,7 @@
 		<li th:text="${lists.name}"></li>
 		<li th:text="${lists.artist}"></li>
 		<li><img th:src="${lists.image[0]['#text']}"></li>
-		<li><a sec:authorize="isAuthenticated()" href="#" target="_blank" th:onclick="input('[(${lists.name})]','[(${lists.artist})]')">노래넣기</a></li>
+		<li><a sec:authorize="isAuthenticated()" target="_blank" href="#" th:onclick="input('[(${lists.name})]','[(${lists.artist})]')">노래넣기</a></li>
 						<!-- 회원 id까지 넣어주기 -->
 	</ul>
 
