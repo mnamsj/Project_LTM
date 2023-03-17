@@ -40,7 +40,7 @@ public class Reply {
 	
 	/*작성자*/
 	@ManyToOne
-	private Member nickname; // 작성자
+	private Member username; // 작성자
 	
 	/*추천*/
 	@ManyToMany

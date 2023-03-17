@@ -48,7 +48,7 @@ public class Adboard {
 	
 	/*작성자*/
 	@ManyToOne
-	private Member nickname; // 작성자
+	private Member username; // 작성자
 	
 	/*태그*/
 	private String tags;

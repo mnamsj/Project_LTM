@@ -56,7 +56,7 @@ public class ReplyController {
 		@GetMapping("/mdate/{id}")
 		public String replyModify(Principal principal, ReplyFormDto replyForm, @PathVariable("id")Integer id) {
 		Reply reply = this.replyService.getReply(id);
-			if(!reply.getNickname().getUsername().equals(principal.getName())) {
+			if(!reply.getUsername().getUsername().equals(principal.getName())) {
 				  throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"수정권한이 없습니다");
 			  }
 			  replyForm.setRbody(reply.getRbody());
@@ -73,7 +73,7 @@ public class ReplyController {
 				return "reply_form";
 			}
 			Reply reply = this.replyService.getReply(id);
-			if(!reply.getNickname().getUsername().equals(principal.getName())){
+			if(!reply.getUsername().getUsername().equals(principal.getName())){
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"수정권한이 없습니다.");
 			}
 			{
@@ -88,7 +88,7 @@ public class ReplyController {
 		@GetMapping("/delete/{id}")
 		public String replyDelete(Principal principal, @PathVariable("id") Integer id) {
 			Reply reply = this.replyService.getReply(id);
-			if(!reply.getNickname().getUsername().equals(principal.getName())) {
+			if(!reply.getUsername().getUsername().equals(principal.getName())) {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 			}
 			this.replyService.delete(reply);

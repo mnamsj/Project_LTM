@@ -20,9 +20,9 @@
                   <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid black; padding-top: 8px">[[${#temporals.format(adboard.wdate, 'yyyy.MM.dd HH:mm')}]]</div>
                </div>
             </li>
-         <li  th:if="${adboard.nickname != null}">
+         <li  th:if="${adboard.username != null}">
             <div>
-               <div style="width: 60%; float: left; border-top: 1px solid black;">[[${adboard.nickname.id}]]</div>
+               <div style="width: 60%; float: left; border-top: 1px solid black;">[[${adboard.username.id}]]</div>
                <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid black; padding-top: 3px">조회수 [[${adboard.view}]]</div>      
             </div>
          </li>
@@ -43,10 +43,10 @@
                   </div>
                   <div style="text-align: right; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid black;">
                      <a class="btn btn-light" th:href="@{|/adboard/mdate/${adboard.id}|}" th:text="수정" sec:authorize="isAuthenticated()"
-                     	th:if="${adboard.nickname != null and #authentication.getPrincipal().getUsername() == adboard.nickname.id}"></a>
+                     	th:if="${adboard.username != null and #authentication.getPrincipal().getUsername() == adboard.username.id}"></a>
                      		<!-- 가독성을 위한 공백 -->
                      <a href="javascript:void(0);" class="delete btn btn-light" th:data-uri="@{|/adboard/delete/${adboard.id}|}" sec:authorize="isAuthenticated()"
-                     	th:if="${adboard.nickname != null and #authentication.getPrincipal().getUsername() == adboard.nickname.id}" th:text="삭제"></a>
+                     	th:if="${adboard.username != null and #authentication.getPrincipal().getUsername() == adboard.username.id}" th:text="삭제"></a>
                   </div>
                </div>
             </li>     

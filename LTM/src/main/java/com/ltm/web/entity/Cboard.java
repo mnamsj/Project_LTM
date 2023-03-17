@@ -51,7 +51,7 @@ public class Cboard {
 	
 	/*작성자*/
 	@ManyToOne
-	private Member nickname; // 작성자
+	private Member username; // 작성자
 	
 	/*추천인 (set은 중복을 허용하지 않는 자료형)*/
 	@ManyToMany // 하나의 질문에 여러사람이 추천할 수 있고 한 사람이 여러 개의 질문을 추천할 수 있다

@@ -43,12 +43,12 @@ public class AdboardService {
 		}
 			
 		/*공지사항 등록*/
-		public void create(String adtitle, String adbody, Member user, String tags) {
+		public void create(String adtitle, String adbody, Member username, String tags) {
 			Adboard ad = new Adboard();
 			ad.setAdtitle(adtitle);
 			ad.setAdbody(adbody);
 			ad.setWdate(LocalDateTime.now());
-			ad.setNickname(user); // 작성자 : user
+			ad.setUsername(username); // 작성자 : user
 			ad.setTags(tags); // 해시태그 
 			this.adboardRepository.save(ad);
 		}

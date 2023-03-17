@@ -28,7 +28,7 @@
 					<a th:href="@{|/cboard/detail/${cboard.id}|}" th:text="${cboard.ctitle}"></a>
 						<span style="color: red;" th:if="${#lists.size(cboard.replyList) > 0}" th:text="${#lists.size(cboard.replyList)}"></span>
 				</td>
-					<td style="border-bottom: 1px solid #e9e9e9; text-align: center;"><span th:if="${cboard.nickname != null}" th:text="${cboard.nickname.id}"></span></td>
+					<td style="border-bottom: 1px solid #e9e9e9; text-align: center;"><span th:if="${cboard.username != null}" th:text="${cboard.username.username}"></span></td>
 					<td style="border-bottom: 1px solid #e9e9e9; text-align: center;" th:text="${#temporals.format(cboard.wdate, 'yyyy.MM.dd')}"></td>
 					<td style="border-bottom: 1px solid #e9e9e9; text-align: center;" th:text="${cboard.view}"></td>
 					<td style="border-bottom: 1px solid #e9e9e9; color:blue; text-align: center;">[[${#lists.size(cboard.voter)}]]</td>

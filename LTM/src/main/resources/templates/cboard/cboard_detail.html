@@ -20,9 +20,9 @@
                   <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid black; padding-top: 8px">[[${#temporals.format(cboard.wdate, 'yyyy.MM.dd HH:mm')}]]</div>
                </div>
             </li>
-         <li  th:if="${cboard.nickname != null}">
+         <li  th:if="${cboard.username != null}">
             <div>
-               <div style="width: 60%; float: left; border-top: 1px solid black;">[[${cboard.nickname.id}]]</div>
+               <div style="width: 60%; float: left; border-top: 1px solid black;">[[${cboard.username.id}]]</div>
                <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid black; padding-top: 3px">조회수 [[${cboard.view}]] 추천 [[${#lists.size(cboard.voter)}]] 댓글 [[${#lists.size(cboard.replyList)}]]</div>      
             </div>
          </li>
@@ -54,10 +54,10 @@
                   </div>
                   <div style="text-align: right; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid black;">
                      <a class="btn btn-light" th:href="@{|/cboard/mdate/${cboard.id}|}" th:text="수정" sec:authorize="isAuthenticated()"
-                     	th:if="${cboard.nickname != null and #authentication.getPrincipal().getUsername() == cboard.nickname.id}"></a>
+                     	th:if="${cboard.username != null and #authentication.getPrincipal().getUsername() == cboard.username.id}"></a>
                      		<!-- 가독성을 위한 공백 -->
                      <a href="javascript:void(0);" class="delete btn btn-light" th:data-uri="@{|/cboard/delete/${cboard.id}|}" sec:authorize="isAuthenticated()"
-                     	th:if="${cboard.nickname != null and #authentication.getPrincipal().getUsername() == cboard.nickname.id}" th:text="삭제"></a>
+                     	th:if="${cboard.username != null and #authentication.getPrincipal().getUsername() == cboard.username.id}" th:text="삭제"></a>
                   </div>
                </div>
             </li>
@@ -69,7 +69,7 @@
             <li>	<!-- 댓글 -->
                <div th:each="reply, loop : ${paging}" th:if="${cboard.id == reply.cboard.id}">
                   <div style="width: 80%; float: left; border-bottom: 1px solid black; padding-top: 10px">
-                     <span th:if="${reply.nickname != null}" th:text="${reply.nickname.id}"></span> 
+                     <span th:if="${reply.username != null}" th:text="${reply.username.id}"></span> 
                      <span style="color: gray;" th:if="${reply.mdate == null}">[[${#temporals.format(reply.wdate, 'yyyy.MM.dd HH:mm')}]]</span>
                      <p>[[${reply.rbody}]]</p>
                   </div>
@@ -83,7 +83,7 @@
                      </div>
                      <div>
                         <div style="width: 10%; float: left; text-align: right; padding-top: 20px; border-bottom: 1px solid black; height: 81px">
-                           <a href="javascript:void(0);" th:data-uri="@{|/reply/delete/${reply.id}|}" class="deleteR btn btn-light" sec:authorize="isAuthenticated()" th:if="${reply.nickname != null and #authentication.getPrincipal().getUsername() == reply.nickname.id}" th:text="삭제"></a>
+                           <a href="javascript:void(0);" th:data-uri="@{|/reply/delete/${reply.id}|}" class="deleteR btn btn-light" sec:authorize="isAuthenticated()" th:if="${reply.username != null and #authentication.getPrincipal().getUsername() == reply.username.id}" th:text="삭제"></a>
                         </div>
                      </div>
                   </div>

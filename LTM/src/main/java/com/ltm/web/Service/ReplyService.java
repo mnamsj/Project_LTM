@@ -26,12 +26,12 @@ public class ReplyService {
 	private final ReplyRepository replyRepository;
 		
 		/*댓글 작성*/
-		public void create(Cboard cboard, String rbody, Member nickname) {
+		public void create(Cboard cboard, String rbody, Member username) {
 			Reply reply = new Reply();
 			reply.setRbody(rbody);
 			reply.setWdate(LocalDateTime.now());
 			reply.setCboard(cboard);
-			reply.setNickname(nickname);
+			reply.setUsername(username);
 			this.replyRepository.save(reply);
 		}
 		

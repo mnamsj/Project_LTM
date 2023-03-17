@@ -49,12 +49,12 @@ public class CboardService {
 		}
 			
 		/*게시글 등록*/
-		public void create(String ctitle, String cbody, Member user, String tags) {
+		public void create(String ctitle, String cbody, Member username, String tags) {
 			Cboard c = new Cboard();
 			c.setCtitle(ctitle);
 			c.setCbody(cbody);
 			c.setWdate(LocalDateTime.now());
-			c.setNickname(user); // 작성자 : user
+			c.setUsername(username); // 작성자 : user
 			c.setTags(tags); // 해시태그 
 			this.cboardRepository.save(c);
 		}
@@ -74,14 +74,14 @@ public class CboardService {
 	            @Override
 	            public Predicate toPredicate(Root<Cboard> q, CriteriaQuery<?> query, CriteriaBuilder cb) {
 	                query.distinct(true);  // 중복을 제거 
-	                Join<Cboard, Member> u1 = q.join("nickname", JoinType.LEFT);
+	                Join<Cboard, Member> u1 = q.join("username", JoinType.LEFT);
 	                Join<Cboard, Reply> a = q.join("replyList", JoinType.LEFT);
-	                Join<Reply, Member> u2 = a.join("nickname", JoinType.LEFT);
+	                Join<Reply, Member> u2 = a.join("username", JoinType.LEFT);
 	                return cb.or(cb.like(q.get("ctitle"), "%" + kw + "%"),
 	                        cb.like(q.get("cbody"), "%" + kw + "%"),
-	                        cb.like(u1.get("nickname"), "%" + kw + "%"), 
+	                        cb.like(u1.get("username"), "%" + kw + "%"), 
 	                        cb.like(a.get("rbody"), "%" + kw + "%"),
-	                        cb.like(u2.get("nickname"), "%" + kw + "%"));
+	                        cb.like(u2.get("username"), "%" + kw + "%"));
 	            }
 	        };
 	    }
