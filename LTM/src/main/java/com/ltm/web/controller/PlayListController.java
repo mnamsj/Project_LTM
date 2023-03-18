@@ -25,6 +25,7 @@ import com.ltm.web.api.SongImageApi;
 import com.ltm.web.entity.Member;
 import com.ltm.web.entity.playlist.PlSong;
 import com.ltm.web.entity.playlist.PlayList;
+import com.ltm.web.entity.playlist.WishList;
 import com.ltm.web.repository.PlSongRepository;
 import com.ltm.web.repository.PlayListRepository;
 
@@ -192,6 +193,19 @@ public class PlayListController {
 		}
 
 		return "redirect:/search";
+	}
+	
+	//플레이리스트에서 노래삭제
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/delete/{plId}/{id}")
+	public String plSongDelete(@PathVariable("plId") Integer plId, @PathVariable("id") Integer id) {
+		System.out.println("4444444444444");
+		
+		PlayList playList = this.playListService.getPl(Long.valueOf(plId));
+		PlSong plSong = this.playListService.getPlsong(Long.valueOf(id));
+		
+		this.playListService.deletePlsong(plSong);
+		return "redirect:/main";
 	}
 
 }

@@ -12,7 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ltm.web.DataNotFoundException;
+import com.ltm.web.entity.Cboard;
+import com.ltm.web.entity.playlist.PlSong;
 import com.ltm.web.entity.playlist.PlayList;
+import com.ltm.web.entity.playlist.WishList;
+import com.ltm.web.repository.PlSongRepository;
 import com.ltm.web.repository.PlayListRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class PlayListService {
 
 	private final PlayListRepository playListRepository;
+	private final PlSongRepository plSongRepository;
 
 	@Transactional
 	public Long savePl(PlayList playList) {
@@ -103,4 +108,29 @@ public class PlayListService {
 			throw new DataNotFoundException("playlist not found");
 		}
 	}
+	
+	//플레이리스트 노래목록 삭제하기
+	public void deletePlsong(PlSong plSong) {
+		this.plSongRepository.delete(plSong);
+	}
+	
+	public PlSong getPlsong(Long id) {
+		Optional<PlSong> plSong = this.plSongRepository.findById(id);
+		if(plSong.isPresent()) {
+			return plSong.get();
+		} else {
+			throw new DataNotFoundException("not found");
+		}
+	}
+	public PlayList getPl(Long id) {
+		Optional<PlayList> playList = this.playListRepository.findById(id);
+		if(playList.isPresent()) {
+			return playList.get();
+		} else {
+			throw new DataNotFoundException("not found");
+		}
+	}
+	
+	
+
 }

@@ -1,39 +1,65 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="www.thymeleaf.org" 
+	  layout:decorate="~{layout}"
+	  lang="en">
 <head>
 <meta charset="UTF-8">
 <title>PL DETAIL</title>
 
-<!-- <link rel="stylesheet" type="text/css" th:href="@{/css/playlist.css}"> -->
+<link rel="stylesheet" type="text/css" th:href="@{/css/Mainplaylist.css}">
 </head>
 <body>
-플레이리스트 상세화면<br>
+<div layout:fragment="content" class="blog-area section_padding_100 mt-100">
+	<div class="container">
+<fieldset>
+<legend>PlayList</legend><br>
 
-
-		<a th:each="Playlist : ${playList22}">
-		<img th:src="${Playlist.image}" />
-		<a th:text="${Playlist.title}"></a>
-		<a th:text="${Playlist.discription}"></a>
-		<a th:text="${Playlist.id}"></a>
-		</a>
+	<div class="conts">
+		<div class="item5" th:each="Playlist : ${playList22}">
+			<table >
+				<tr>
+					<td >
+						<img class="plimage1" th:if="${Playlist.image != null}" th:src="${Playlist.image}">
+						<img class="plimage1" th:unless="${Playlist.image != null}" src="/img/nullsongimg.png">
+					</td>
+					<td>
+						<ul>	
+						<li th:text="${Playlist.title}"></li>
+						<br> 소개글
+						<li th:text="${Playlist.discription}"></li>
+						<br><li>DJ : <a th:text="${Playlist.id}"></li>
+						</ul>
+					</td>
+				<tr>
+			</table>
+		</div>
+	</div>
+</fieldset>
+	<hr>
 		
-		<hr>
-		
-		<ul th:each="Song : ${song22}">
-			<!-- <img th:src="@{/img/album/} + ${Song.thumbnail}" /> -->
-			<li th:text="${Song.songTitle}"></li>
-			<li th:text="${Song.singer}"></li>
-			<li>
-				<img class="songimg" style="width:40px; height:40px;" th:if="${Song.image != null}" th:src="${Song.image}">
-				<img class="songimg" style="width:40px; height:40px;" th:unless="${Song.image != null}" src="/img/nullsongimg.png">
-			</li>
-			<li sec:authorize="isAuthenticated()"><a href="#"
-					th:onclick="remove('[[${Song.id}]]','[[${Song.playList.id}]]')">삭제</a></li>
-		</ul>
-
-
+		<table>
+			<tr>
+				<th>  </th>
+				<th>노래제목</th>
+				<th>가수</th>
+			</tr>
+			<div class="item2" th:each="Song : ${song22}">
+				<!-- <img th:src="@{/img/album/} + ${Song.thumbnail}" /> -->
+			<tr>
+				<td><img th:src="${Song.image}"></td>
+				<td th:text="${Song.songTitle}"></td>
+				<td th:text="${Song.singer}"></td>
+				<td sec:authorize="isAuthenticated()">
+				<a class="delete btn btn-light" th:data-uri="@{|/playlist/delete/${Song.playList.id}/${Song.id}}"
+				 sec:authorize="isAuthenticated()"
+						th:if="${Song.id != null }" th:text="삭제"></a>
+			</tr>
+			</div>
+		</table>
+	</div>
+</div>
 </body>
-<script>
+<script layout:fragment="script" type='text/javascript'>
 	function remove(plSongId,plId) {
 		var form = document.createElement("form");
 		form.setAttribute("method", "post");
@@ -48,5 +74,14 @@
 		document.body.appendChild(form);
 		form.submit();
 	}
+	
+	const delete_elements = document.getElementsByClassName("delete");
+	   Array.from(delete_elements).forEach(function(element) {
+	      element.addEventListener('click', function() {
+	         if (confirm("삭제하시겠습니까?")) {
+	            location.href = this.dataset.uri;
+	         };
+	      });
+	   });
 </script>
 </html>

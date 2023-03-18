@@ -92,3 +92,10 @@ li {
 	font-size: 20px;
 	font-weight: bold;
 }
+
+
+
+.item2 tr td{
+	
+	width:90%;
+}

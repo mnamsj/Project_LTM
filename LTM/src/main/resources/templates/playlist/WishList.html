@@ -4,6 +4,7 @@
 	  lang="en">
 <head>
 <link rel="stylesheet" type="text/css" th:href="@{/css/MainPlayList.css}">
+<link rel="stylesheet" href="/css/cboard_list.css" />
 </head>
 <body>
 <div layout:fragment="content" class="blog-area section_padding_100 mt-100">
@@ -41,7 +42,8 @@
 						<span class="titletext" th:text="${lists.title}"></span>
 						<span class="idtext" th:text="${lists.member.username}"></span>
 					</a>
-						
+						<a class="delete btn btn-light" th:data-uri="@{|/delete/${id} (id=${lists.id})}" sec:authorize="isAuthenticated()"
+						th:if="${lists.id != null }" th:text="삭제"></a>
 
 				</div>				
 		</div>
@@ -51,18 +53,15 @@
 </div>
 
 	
-<th:block layout:fragment="script">
-    <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="js/main/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/main/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/main/bootstrap.min.js"></script>
-    <!-- Plugins js -->
-    <script src="js/main/plugins.js"></script>
-    <!-- Active js -->
-    <script src="js/main/active.js"></script>
-</th:block>
-
+<script layout:fragment="script" type='text/javascript'>
+	   const delete_elements = document.getElementsByClassName("delete");
+	   Array.from(delete_elements).forEach(function(element) {
+	      element.addEventListener('click', function() {
+	         if (confirm("삭제하시겠습니까?")) {
+	            location.href = this.dataset.uri;
+	         };
+	      });
+	   });
+</script>
 </body>
 </html>
