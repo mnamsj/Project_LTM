@@ -11,11 +11,28 @@
 		
 
     <div class="iconheader">
-	<ul style="display:flex; justify-content: center;">    	
-        	<li style="width: 60%; float: left;">
-            		<a th:href="@{/playlist/new}">
-            			<img class="addimage" src="/img/plusicon.png" alt="">
-            		</a>
+	<ul style="display:flex; justify-content: center;">
+			
+        	<li style="width: 60%; float: left;">        	
+            	<nav class="nav">
+  					<input type="checkbox" class="nav__cb" id="menu-cb"/>
+  						<div class="nav__content">
+    						<ul class="nav__items">
+      							<li class="nav__item">
+        							<a class="nav__item-text" th:href="@{/playlist/new}">
+          								플레이리스트 만들기
+        							</a>
+      							</li>
+      							<li class="nav__item">
+        							<a class="nav__item-text" th:href="@{/search}">
+          								노래 검색
+        							</a>
+      							</li>
+      						
+							</ul>
+						</div>
+					<label class="nav__btn" for="menu-cb"></label>
+				</nav>    	
  	    	</li>
         	<li style="width: 40%; float: left;">
             	<div class="input-group" style="width: 100%;">
@@ -34,10 +51,9 @@
 		        	
 					<!-- <p th:text="${Playlist.nickname}"></p> -->
 					
-					
+					<a th:href="@{/playlist/{id}/song (id=${Playlist.id})}">
 						<img class="plimage1" th:if="${Playlist.image != null}" th:src="${Playlist.image}">
 						<img class="plimage1" th:unless="${Playlist.image != null}" src="/img/nullsongimg.png">
-					<a th:href="@{/playlist/{id}/song (id=${Playlist.id})}">
 						<span class="titletext" th:text="${Playlist.title}"></span>
 						<span class="idtext" th:text="${Playlist.member.username}"></span>
 					</a>
