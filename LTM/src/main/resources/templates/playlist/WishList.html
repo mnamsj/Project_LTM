@@ -5,54 +5,110 @@
 <head>
 <link rel="stylesheet" type="text/css" th:href="@{/css/MainPlayList.css}">
 <link rel="stylesheet" href="/css/cboard_list.css" />
+<link rel="stylesheet" href="/css/MyPage.css" />
 </head>
 <body>
 <div layout:fragment="content" class="blog-area section_padding_100 mt-100">
 	<div class="container">
+ 
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="/js/mypage.js"></script>
+
+<center><h2>MY PAGE</h2></center>
+<hr style="border-top: 1px solid black; margin: 1rem 5px;">
+
 		
+ 		<div class="item1" th:each="memberInfo: ${memberInfo}">
+			<h3 style="">
+			<li><img src="/img/profile.png" alt="">회원 정보</li>
+			<br>
+			<li>
+				아이디 : <span style="list-style:none;" th:text="${memberInfo.idNum}"></span>
+			</li>
+			<li>
+				이름 : <span style="list-style:none;" th:text="${memberInfo.username}"></span>
+			</li>
+			<li>
+				이메일 : <span style="list-style:none;" th:text="${memberInfo.email}"></span>
+			</li>
+			</h3>
+		</div>
+ <br>
+<hr style="border-top: 1px solid black; margin: 1rem 35px;">
 
-    <!-- <div class="iconheader">
-	<ul style="display:flex; justify-content: center;">    	
-        	<li style="width: 60%; float: left;">
-            		<a th:href="@{/playlist/new}">
-            			<img class="addimage" src="/img/plusicon.png" alt="">
-            		</a>
- 	    	</li>
-        	<li style="width: 40%; float: left;">
-            	<div class="input-group" style="width: 100%;">
-                	<input type="text" id="search_kw" class="form-control" th:value="${kw}">
-                	<button class="btn btn-outline-secondary" type="button" id="btn_search">검색</button>
-            	</div>
-        	</li>
-     </ul>    
-    </div> -->
-   
-	<hr style="border-top: 1px solid black; margin: 1rem 35px;">
+	
 
-		<!-- 플레이리스트 목록 -->
-		<div class="Allplaylist">
-		        <div class="item" th:each="lists: ${wishlist}">
-		        	
-					<!-- <p th:text="${Playlist.nickname}"></p> -->
-					
-					
+
+  <!-- contents -->
+  <div class="container">
+  	<div class="tabonoff content-wrap">
+      <!-- 탭메뉴 -->
+      <ul id="tabMenu" class="jq_tab tab-menu">
+        <li>
+          <a href="javascript:void(0);" class="tit"><span>My WishList</span></a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" class="tit"><span>My PlayList</span></a>
+        </li>
+      </ul>
+      <!-- //탭메뉴 -->
+      <div class="cont-wrap">
+      <!-- 탭1_설치 -->
+      <div class="tab-cont">
+        <div class="tabonoff sub-tabs">
+
+      	<div class="cont-wrap cont-box">
+            <!-- IDPW_탭1_1-->
+            <div class="tab-cont">
+                <div class="form-group">
+                    <!-- 플레이리스트 목록 -->
+				<div class="Allplaylist">
+		        	<div class="item" th:each="lists: ${wishlist}">
 						<img class="plimage1" th:if="${lists.image != null}" th:src="${lists.image}">
 						<img class="plimage1" th:unless="${lists.image != null}" src="/img/nullsongimg.png">
-					<a th:href="@{/playlist/{id}/song (id=${lists.id})}">
+						<a th:href="@{/playlist/{id}/song (id=${lists.id})}">
 						<span class="titletext" th:text="${lists.title}"></span>
 						<span class="idtext" th:text="${lists.member.username}"></span>
-					</a>
+						</a>
 						<a class="delete btn btn-light" th:data-uri="@{|/delete/${id} (id=${lists.id})}" sec:authorize="isAuthenticated()"
 						th:if="${lists.id != null }" th:text="삭제"></a>
 
-				</div>				
-		</div>
-		
-		
+					</div>				
+				</div>
+                </div>
+            </div>
+            <!-- //IDPW_탭1_1 -->
+           
+    			</div>
+    		</div>
+    	</div>
+    	<!-- //탭1_설치 -->
+    	<!-- 탭2_미설치 -->
+    	<div class="tab-cont">
+    		<div class="tabonoff sub-tabs">
+             
+                <div class="cont-wrap cont-box">
+                    <!-- 탭2_1 -->
+                    <div class="tab-cont">
+                      <div class="form-group">
+                        aa
+
+                      </div>
+                    </div>
+                    <!-- //탭2_1 -->
+  					</div>
+  				</div>
+  			</div>
+  			<!-- //탭2_미설치 -->                 
+  		</div>                      
+  	</div>
+  </div>
+  <!-- //contents -->
+
 </div>
 </div>
 
-	
+
 <script layout:fragment="script" type='text/javascript'>
 	   const delete_elements = document.getElementsByClassName("delete");
 	   Array.from(delete_elements).forEach(function(element) {
@@ -63,5 +119,8 @@
 	      });
 	   });
 </script>
+
+
+
 </body>
 </html>

@@ -43,7 +43,7 @@ public class WishListController {
 
 		wishListService.saveWishList(member.getIdNum(), plId);
 		
-		return "redirect:/"; 
+		return "redirect:/main"; 
 	}
 	
 	//내 위시리스트 페이지
@@ -57,6 +57,7 @@ public class WishListController {
 		List<PlayList> findWl = wishListService.findWl(member.getIdNum());
 		
 		model.addAttribute("wishlist",findWl);
+		model.addAttribute("memberInfo", member);
 		return "playlist/WishList";
 	}
 	
@@ -70,4 +71,6 @@ public class WishListController {
 		this.wishListService.deletePl(wishList);
 		return "redirect:/main";
 	}
+	
+
 }
