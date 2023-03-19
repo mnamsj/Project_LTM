@@ -1,30 +1,44 @@
 <!DOCTYPE HTML>
 <html xmlns:th="www.thymeleaf.org" 
-	  layout:decorate="~{layout}"
 	  lang="en">
-
+<head>
+	<link rel="stylesheet" href="/css/PlaylistModal.css">
+</head>
 <body>
-<div layout:fragment="content" class="blog-area section_padding_100 mt-100">
-	<div class="container">
+<th:block th:fragment="createForm">
+
+
+	<div class="content">
 		
-		<form role="form" th:action="@{/playlist/new}" th:object="${playListForm}"
+		<form th:action="@{/playlist/new}" th:object="${playListFormDto}"
 			method="post">
-			<div class="form-group">
-				<label th:for="title">제목</label> 
-				<input type="text"
-					th:field="*{title}" class="form-control" placeholder="제목">
+			<div class="header">
+				<h2>플레이리스트 만들기</h2>
 			</div>
-			<div class="form-group">
-				<label th:for="discription">설명</label> <input type="text"
-					th:field="*{discription}" class="form-control" placeholder="설명">
+			<div class="content-body">
+			<div class="title-form">
+				<label th:for="title"><span>제목 :</span></label> 
+				<input type="text"
+					th:field="*{title}" class="title">
+			</div>
+			<div class="discription-form">
+				<label th:for="discription"><span>설명</span></label> 
+				<input type="text"
+					th:field="*{discription}" class="discription">
+			</div>
 			</div>
 			
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<div class="content-footer">
+				<button type="button" class="btn-cancel">취소</button>
+				<button type="submit" class="btn-create">만들기</button>
+			</div>
 		</form>
-		<br />
+		
+	</div>
 
-	</div>
-	</div>
-	<!-- /container -->
+	
+
+</th:block>
 </body>
+
 </html>

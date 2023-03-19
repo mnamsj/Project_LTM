@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,15 +46,16 @@ public class PlayListController {
 	// 플레이리스트 만들기
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/new")
-	public String createForm(Model model,Principal principal) {
+	public String createForm(Model model) {
 
-		model.addAttribute("playListForm", new PlayListFormDto());
+		model.addAttribute("playListFormDto", new PlayListFormDto());
 		return "playlist/createPlForm";
 	}
 
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/new")
-	public String create(@Valid PlayListFormDto form, BindingResult result,Principal principal) {
+	public String create(@ModelAttribute("playListFormDto") @Valid PlayListFormDto form,
+						 BindingResult result,Principal principal) {
 
 		if (result.hasErrors()) {// 에러가 있으면 다시 회원가입폼으로 이동
 			return "playlist/createPlForm";
@@ -201,11 +203,13 @@ public class PlayListController {
 	public String plSongDelete(@PathVariable("plId") Integer plId, @PathVariable("id") Integer id) {
 		System.out.println("4444444444444");
 		
-		PlayList playList = this.playListService.getPl(Long.valueOf(plId));
+//		PlayList playList = this.playListService.getPl(Long.valueOf(plId));
 		PlSong plSong = this.playListService.getPlsong(Long.valueOf(id));
 		
 		this.playListService.deletePlsong(plSong);
 		return "redirect:/main";
 	}
+	
+	
 
 }
