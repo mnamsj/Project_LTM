@@ -31,7 +31,7 @@
                 <div class="collapse navbar-collapse" id="studioMenu">
                   <!-- Menu Area Start  -->
                   <ul class="navbar-nav ml-auto">
-                  <a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/member/login}">관리자페이지</a>
+                  <a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/main}">관리자페이지</a>
                     <li class="nav-item active">
                       <a class="nav-link" th:href="@{/main}"
                         >Home <span class="sr-only">(current)</span></a
@@ -49,7 +49,7 @@
                     <li class="nav-item">
                       <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/event}">Event</a>
                     </li>
-                     <li class="nav-item" style="list-style:none;">
+                     <li class="nav-item">
                       <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/mypage}">Mypage</a>
                     </li>
                     <!-- <li class="nav-item dropdown">
@@ -67,12 +67,12 @@
                         aria-labelledby="navbarDropdown"
                       >
                         <a class="dropdown-item" href="/member/mypage">MyList</a>
-                        <a class="dropdown-item" href="">Account</a> -->
-                      </div>
+                        <a class="dropdown-item" href="">Account</a>
+                      </div> -->
 
                     <li class="nav-item">
                       <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/member/login}">LOGIN</a>
-                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">LOGOUT</a>
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/}">LOGOUT</a>
                     </li>
                   </ul>
                 </div>

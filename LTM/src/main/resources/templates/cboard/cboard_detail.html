@@ -5,8 +5,17 @@
 <title>게시글</title>
 <!-- 커뮤니티 css -->
 <link rel="stylesheet" href="/css/cboard_list.css" />
+<script>
+	let slide = document.getElementById("Slide");
+	let imgArr = ["/images/cry_music.png", "/images/rock_music.png", "/images/listen_music.png"];
+
+	setInterval(()=>{
+	let ranNum = Math.floor(Math.random() * imgArr.length);
+	Slide.src= imgArr[ranNum];
+	},2000);
+</script>
 </head>
-<body>
+<body onload="showImage()">
 <div layout:fragment="content" class="blog-area section_padding_100 mt-100" style="height: 1950px">
    <div class="container">
 	  <div>
@@ -30,6 +39,11 @@
             <div style="border-bottom: 1px solid #e9e9e9;">
                <div style="width: 1110px; height: 400px; text-align: left; float: left; border-top: 1px solid #e9e9e9;" th:utext="${cboard.cbody}"></div>
             </div>
+            <div style="height: 0; width:500px; margin-left: 1000px;">
+				<a th:href="@{/playlist/list}" target="_blank">
+					<img src="/images/cry_music.png" alt="" id="Slide" style="width: 230px; height: 500px; margin-left: 80px; margin-top: 50px">
+				</a>
+			</div>
          </li>         
             <li>
                <div>
