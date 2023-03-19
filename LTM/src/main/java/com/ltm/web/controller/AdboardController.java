@@ -119,7 +119,7 @@ public class AdboardController {
 		public String adboardModify(AdboardFormDto adboardForm, @PathVariable("id") Integer id,
 				Principal principal) {
 			Adboard adboard = this.adboardService.getAdboard(id);
-			if(!adboard.getUsername().equals(principal.getName())) {
+			if(!adboard.getUsername().getUsername().equals(principal.getName())) {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
 			}
 			adboardForm.setAdtitle(adboard.getAdtitle());
@@ -137,7 +137,7 @@ public class AdboardController {
 				return "adboard/adboard_form";
 			}
 			Adboard adboard = this.adboardService.getAdboard(id);
-			if(!adboard.getUsername().equals(principal.getName())) {
+			if(!adboard.getUsername().getUsername().equals(principal.getName())) {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"수정권한이 없습니다.");
 			}
 			this.adboardService.modify(adboard, adboardForm.getAdtitle(), adboardForm.getAdbody(), adboardForm.getTags());
@@ -149,12 +149,12 @@ public class AdboardController {
 		@GetMapping("/delete/{id}")
 		public String adboardDelete(Principal principal, @PathVariable("id") Integer id) {
 			Adboard adboard = this.adboardService.getAdboard(id);
-			if(!adboard.getUsername().equals(principal.getName())) {
+			if(!adboard.getUsername().getUsername().equals(principal.getName())) {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
 			}
 		
 			this.adboardService.delete(adboard);
-			return "redirect:/";
+			return "redirect:/adboard/list";
 		}
 		
 		/*templates 다중경로 설정*/

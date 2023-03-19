@@ -4,15 +4,24 @@
 <meta charset="UTF-8">
 <title>게시글 리스트</title>
 	<link rel="stylesheet" href="/css/cboard_list.css"/>
+<script>
+	let slide = document.getElementById("Slide");
+	let imgArr = ["/images/cry_music.png", "/images/rock_music.png", "/images/listen_music.png"];
+
+	setInterval(()=>{
+	let ranNum = Math.floor(Math.random() * imgArr.length);
+	Slide.src= imgArr[ranNum];
+	},2000);
+</script>
 </head>
-<body>
-	<div layout:fragment="content" class="container" style="padding-top: 130px; padding-left: 80px;">
+<body onload="showImage()">
+	<div layout:fragment="content" class="container" style="padding-top: 130px; padding-left: 80px; width: 1000px; height: 1500px">
 		<div>
 			<h1>Talk</h1>
 		</div>
 		<table style="width: 90%;">
 			<thead>
-				<tr style="border-bottom: 1px solid #e9e9e9; text-align: center;">
+				<tr style="border-bottom: 1px solid #e9e9e9; text-align: center; height: 50px">
 					<td>번호</td>
 					<td>제목</td>
 					<td>작성자</td>
@@ -22,7 +31,7 @@
 				</tr>
 			</thead>
 		<tbody>
-			<tr th:each="cboard, loop : ${paging}">
+			<tr th:each="cboard, loop : ${paging}" style="height: 50px">
 				<td style="border-bottom: 1px solid #e9e9e9; text-align: center;" th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
 				<td style="border-bottom: 1px solid #e9e9e9; text-align: center;">
 					<a th:href="@{|/cboard/detail/${cboard.id}|}" th:text="${cboard.ctitle}"></a>
@@ -34,17 +43,24 @@
 					<td style="border-bottom: 1px solid #e9e9e9; color:blue; text-align: center;">[[${#lists.size(cboard.voter)}]]</td>
 			</tr>
 		</tbody>
+		<div style="height: 0; width:500px; margin-left: 850px;">
+			<a th:href="@{/playlist/list}" target="_blank">
+				<img src="/images/cry_music.png" alt="" id="Slide" style="width: 230px; height: 500px; margin-left: 50px; margin-top: 100px">
+			</a>
+		</div>
 	</table>
+	<div>
 		<form>
 			<input id="search_kw" th:value="${kw}" class="form-control me-2" style="width: 15%; margin-top: 30px; display:inline-block;" type="text"/> 
 				<button class="btn btn-outline-secondary" type="button" id="btn_search">
 					<i class="bi bi-search"></i>
 				</button>
+				<a class="btn btn-light" style="float: right; margin-top: 35px; margin-right: 85px;"  sec:authorize="isAuthenticated()" th:href="@{/cboard/create}">글쓰기</a>
 		</form>
-	<div style="margin-left:840px; margin-top: -35px;">
-		<a class="btn btn-light"  sec:authorize="isAuthenticated()" th:href="@{/cboard/create}">글쓰기</a>
+	
+		
 	</div>
-	<div td:if="${!paging.isEmpty()}" aria-label="Page navigation example" style="padding-left: 350px; padding-top:50px; position: fixed;">
+	<div th:if="${!paging.isEmpty()}" aria-label="Page navigation example" style="margin-left: 290px">
 		<ul style="list-style: none;" class="pagination">
 			<li class="page-item" th:classappend="${!paging.hasPrevious}? 'disabled'">
 				<a class="page-link" href="javascript:void(0)" th:data-page="${paging.number-1}">

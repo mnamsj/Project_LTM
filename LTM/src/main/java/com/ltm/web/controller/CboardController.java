@@ -87,7 +87,7 @@ public class CboardController {
 				}
 			} else {
 				this.cboardService.updateView(id);
-				Cookie newCookie = new Cookie("postView", "[" + id + "]");
+				Cookie newCookie = new Cookie("postView", "[" + id + "]");				
 				newCookie.setPath("/");
 				newCookie.setMaxAge(60 * 60 * 24); 								
 				response.addCookie(newCookie);
@@ -157,7 +157,7 @@ public class CboardController {
 			}
 		
 			this.cboardService.delete(cboard);
-			return "redirect:/";
+			return "redirect:/cboard/list";
 		}
 		
 		/*게시글 추천*/
