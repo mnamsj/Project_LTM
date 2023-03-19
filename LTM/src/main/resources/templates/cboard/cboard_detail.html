@@ -112,7 +112,7 @@
 					<span style="color: black;">이전</span>
 				</a>
 			</li>
-			<li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+			<li class="page-item" th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
 				th:if="${page >= paging.number-3 and page <= paging.number+3}"
 				th:classappend="${page == paging.number} ? 'active'">
 				<a style="color: black;" class="page-link" th:text="${page}" th:href="@{|?page=${page}|}"></a>

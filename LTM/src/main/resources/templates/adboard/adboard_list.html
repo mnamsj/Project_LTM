@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 리스트</title>
-<link rel="stylesheet" href="/css/cboard_list.css" />
+	<link rel="stylesheet" href="/css/cboard_list.css"/>
 <script>
 	let slide = document.getElementById("Slide");
 	let imgArr = ["/images/cry_music.png", "/images/rock_music.png", "/images/listen_music.png"];
@@ -46,23 +46,20 @@
 			</a>
 		</div>
 	</table>
-	<div style="margin-left:745px; margin-top: 50px;">
-		<a class="btn btn-light"  sec:authorize="hasRole('ADMIN')" th:href="@{/adboard/create}">글쓰기</a>
-	</div>
-	<div td:if="${!paging.isEmpty()}" aria-label="Page navigation example" style="margin-left: 290px">
+	<div th:if="${paging}" aria-label="Page navigation example" style="margin-left: 290px; padding-top: 30px;">
 		<ul style="list-style: none;" class="pagination">
 			<li class="page-item" th:classappend="${!paging.hasPrevious}? 'disabled'">
-				<a class="page-link" href="javascript:void(0)" th:data-page="${paging.number-1}">
+				<a class="page-link" th:href="@{|?page=${paging.number-1}|}">
 					<span style="color: black;">이전</span>
 				</a>
 			</li>
-			<li th:each="page : ${#numbers.sequence(0, paging.totalPages-1)}"
+			<li class="page-item" th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
 				th:if="${page >= paging.number-3 and page <= paging.number+3}"
-				th:classappend="${page == paging.number}? 'active'">
-				<a style="color: black;" class="page-link" th:text="${page}" href="javascript:void(0)" th:data-page="${page}"></a>
+				th:classappend="${page == paging.number} ? 'active'">
+				<a style="color: black;" class="page-link" th:text="${page}" th:href="@{|?page=${page}|}"></a>
 			</li>
-			<li class="page-item" th:classappend="${!paging.hasNext}?'disabled'">
-				<a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+1}">
+			<li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+				<a class="page-link" th:href="@{|?page=${paging.number+1}|}">
 					<span style="color: black;">다음</span>
 				</a>
 			</li>
@@ -70,14 +67,4 @@
 	</div>
 	</div>
 </body>
-<script layout:fragment="script" type='text/javascript'>
-// 페이징
-const page_elements = document.getElementsByClassName("page-link");
-Array.from(page_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        document.getElementById('page').value = this.dataset.page;
-        document.getElementById('searchForm').submit();
-    });
-});
-</script>
 </html>
