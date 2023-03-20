@@ -22,12 +22,20 @@
 						<img class="plimage1" th:if="${Playlist.image != null}" th:src="${Playlist.image}">
 						<img class="plimage1" th:unless="${Playlist.image != null}" src="/img/nullsongimg.png">
 					</td>
+					<td style="border-bottom: 0px; text-align: center; padding-right: 20px"></td>
 					<td>
 						<ul>	
 						<li th:text="${Playlist.title}"></li>
-						<br> 소개글
+						<br> 소개글 :
 						<li th:text="${Playlist.discription}"></li>
-						<br><li>DJ : <a th:text="${Playlist.id}"></li>
+						<br><li>DJ : <a th:text="${Playlist.member.username}"></li>
+						<br>
+						<li>
+							<button sec:authorize="isAuthenticated()" th:onclick="wishlist('[[${Playlist.id}]]')"> 
+							<span class="idtext2">위시리스트 담기</span></button>
+							<!-- <a class="wish btn btn-light" th:data-uri="@{|/playlist/wishlist/${Playlist.id}}"
+							sec:authorize="isAuthenticated()" th:text="담기"></a> -->
+						</li>
 						</ul>
 					</td>
 				<tr>
@@ -37,22 +45,26 @@
 </fieldset>
 	<hr>
 		
-		<table>
-			<tr>
+		<table class="wish_pl_song">
+			<tr style="height: 50px">
+				<th style="padding-right: 200px">  </th>
 				<th>  </th>
-				<th>노래제목</th>
-				<th>가수</th>
+				<th style="padding-right: 200px">노래제목</th>
+				<th>  </th>
+				<th style="padding-right: 200px">가수</th>
 			</tr>
 			<div class="item2" th:each="Song : ${song22}">
 				<!-- <img th:src="@{/img/album/} + ${Song.thumbnail}" /> -->
 			<tr>
-				<td><img th:src="${Song.image}"></td>
-				<td th:text="${Song.songTitle}"></td>
-				<td th:text="${Song.singer}"></td>
+				<td style="border-bottom: 0px; text-align: center; padding-right: 20px">
+				<img th:src="${Song.image}"></td>
+				<td style="border-bottom: 0px; text-align: center; padding-right: 20px" th:text="${Song.songTitle}"></td>
+				<td> </td>
+				<td style="border-bottom: 0px; text-align: center; padding-right: 20px" th:text="${Song.singer}"></td>
 				<td sec:authorize="isAuthenticated()">
 				<a class="delete btn btn-light" th:data-uri="@{|/playlist/delete/${Song.playList.id}/${Song.id}}"
-				 sec:authorize="isAuthenticated()"
-						th:if="${Song.id != null }" th:text="삭제"></a>
+				 sec:authorize="isAuthenticated()" th:if="${Song.id != null}" th:text="삭제"></a>
+				<!-- and #authentication.getPrincipal() == Song.playlist.member.id -->
 			</tr>
 			</div>
 		</table>
@@ -83,5 +95,14 @@
 	         };
 	      });
 	   });
+	   
+		const wish_elements = document.getElementsByClassName("wish");
+		   Array.from(wish_elements).forEach(function(element) {
+		      element.addEventListener('click', function() {
+		         if (confirm("위시리스트에 담으시겠습니까?")) {
+		            location.href = this.dataset.uri;
+		         };
+		      });
+		   });
 </script>
 </html>

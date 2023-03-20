@@ -61,17 +61,14 @@
 			<div class="Allplaylist">
 				<div class="item" th:each="Playlist, PlaylistStatus : ${paging}">
 
-					<!-- <p th:text="${Playlist.nickname}"></p> -->
-
-					<a th:href="@{/playlist/{id}/song (id=${Playlist.id})}"> <img
-						class="plimage1" th:if="${Playlist.image != null}"
+					<a th:href="@{/playlist/{id}/song (id=${Playlist.id})}"> 
+					<img class="plimage1" th:if="${Playlist.image != null}"
 						th:src="${Playlist.image}"> <img class="plimage1"
 						th:unless="${Playlist.image != null}" src="/img/nullsongimg.png">
-						<span class="titletext" th:text="${Playlist.title}"></span> <span
-						class="idtext" th:text="${Playlist.member.username}"></span>
-					</a> <a sec:authorize="isAuthenticated()"
-						th:onclick="wishlist('[[${Playlist.id}]]')"> <span
-						class="idtext"> 좋아요 </span>
+						<span class="titletext" th:text="${Playlist.title}"></span> 
+						<span class="idtext" th:text="${Playlist.member.username}"></span></a>
+						<a sec:authorize="isAuthenticated()" th:onclick="wishlist('[[${Playlist.id}]]')"> 
+						<span class="idtext"> 좋아요 </span>
 					</a>
 				</div>
 			</div>

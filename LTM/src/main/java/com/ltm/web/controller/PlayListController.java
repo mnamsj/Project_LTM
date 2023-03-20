@@ -7,6 +7,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.ltm.web.Dto.CboardFormDto;
 import com.ltm.web.Dto.PlayListFormDto;
 import com.ltm.web.Service.MemberService;
 import com.ltm.web.Service.PlSongService;
@@ -54,22 +57,21 @@ public class PlayListController {
 
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/new")
-	public String create(@ModelAttribute("playListFormDto") @Valid PlayListFormDto form,
-						 BindingResult result,Principal principal) {
+	public String create(@ModelAttribute("playListFormDto") @Valid PlayListFormDto form, BindingResult result,
+			Principal principal) {
 
 		if (result.hasErrors()) {// 에러가 있으면 다시 회원가입폼으로 이동
 			return "playlist/createPlForm";
 		}
 
 		Member member = this.memberService.getMember(principal.getName());
-		
+
 		// Dto 생성 필요
 		PlayList playList = new PlayList();
 		playList.setTitle(form.getTitle());
 		playList.setDiscription(form.getDiscription());
 		playList.setMember(member);
 
-		
 		playListService.savePl(playList);
 		return "redirect:/main";
 	}
@@ -80,7 +82,7 @@ public class PlayListController {
 	public String showAll(Model model, Principal principal) {
 
 		Member member = this.memberService.getMember(principal.getName());
-		
+
 		List<PlayList> myList = playListService.findMemberPl(member.getIdNum());
 
 		model.addAttribute("mylist", myList);
@@ -139,7 +141,7 @@ public class PlayListController {
 
 	}
 
-	//플레이리스트 상세 페이지
+	// 플레이리스트 상세 페이지
 	@GetMapping("/{id}/song")
 	public String pldetail(Model model, @PathVariable("id") Long plId) {
 		PlayList playlist = this.playListService.findOne(plId);
@@ -158,21 +160,18 @@ public class PlayListController {
 		return "redirect:/playlist/{plId}/song";
 	}
 
-	
-	//컨트롤러 이동 생각해보기
+	// 컨트롤러 이동 생각해보기
 	// 내 플레이리스트에 노래 넣기
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/inputsong")
-	public String inputSongDetail(@RequestParam("songTitle") String songTitle, 
-							      @RequestParam("singer") String singer,
-							      Principal principal,
-							      Model model) {
-		
+	public String inputSongDetail(@RequestParam("songTitle") String songTitle, @RequestParam("singer") String singer,
+			Principal principal, Model model) {
+
 		Member member = this.memberService.getMember(principal.getName());
 
-		//내 플레이리스트 조회
+		// 내 플레이리스트 조회
 		List<PlayList> myPlayList = playListService.findMemberPl(member.getIdNum());
-	
+
 		model.addAttribute("myList", myPlayList);
 		model.addAttribute("Title", songTitle);
 		model.addAttribute("singer", singer);
@@ -180,15 +179,14 @@ public class PlayListController {
 	}
 
 	@PostMapping("/inputsong")
-	public String inputSong(@RequestParam("plId") Long plId, 
-					        @RequestParam("songTitle") String songTitle,
-					        @RequestParam("singer") String singer) {
+	public String inputSong(@RequestParam("plId") Long plId, @RequestParam("songTitle") String songTitle,
+			@RequestParam("singer") String singer) {
 
-		List<String> songImage = songImageApi.getImage(songTitle, singer);		
+		List<String> songImage = songImageApi.getImage(songTitle, singer);
 		plSongService.plSong(plId, songTitle, singer, songImage.get(0));// 담은 노래의 id
-		
+
 		PlayList playList = playListService.findOne(plId);
-		if(playList.getImage() == null) {
+		if (playList.getImage() == null) {
 			String plImage = songImage.get(1);
 			playList.setImage(plImage);
 			playListService.savePl(playList);
@@ -196,20 +194,43 @@ public class PlayListController {
 
 		return "redirect:/search";
 	}
-	
-	//플레이리스트에서 노래삭제
+
+	// 플레이리스트에서 노래삭제
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/delete/{plId}/{id}")
-	public String plSongDelete(@PathVariable("plId") Integer plId, @PathVariable("id") Integer id) {
-		System.out.println("4444444444444");
-		
+	public String plSongDelete(@PathVariable("plId") Integer plId, @PathVariable("id") Integer id,
+			Principal principal) {
+
 //		PlayList playList = this.playListService.getPl(Long.valueOf(plId));
 		PlSong plSong = this.playListService.getPlsong(Long.valueOf(id));
-		
+
+		/*
+		 * if (!plSong.getPlayList().getMember().equals(principal.getName())) { throw
+		 * new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다."); }
+		 */
+
 		this.playListService.deletePlsong(plSong);
-		return "redirect:/main";
+		return "redirect:/playlist/list";
 	}
-	
-	
+
+	// 플레이리스트 상세페이지에서 위시리스트 담기
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/wishlist/{plId}")
+	public String plAddWishList(@PathVariable("plId") Integer plId) {
+		PlayList playList = this.playListService.getPl(Long.valueOf(plId));
+
+		return "redirect:/playlist/list";
+	}
+
+	/*
+	 * 게시글 등록
+	 * 
+	 * public String cboardCreate(@Valid CboardFormDto cboardForm, BindingResult
+	 * bindingResult, Principal principal){ if(bindingResult.hasErrors()) { return
+	 * "cboard/cboard_form"; } Member member =
+	 * this.memberService.getMember(principal.getName());
+	 * this.cboardService.create(cboardForm.getCtitle(), cboardForm.getCbody(),
+	 * member, cboardForm.getTags()); return "redirect:/cboard/list"; // 등록후 목록으로 }
+	 */
 
 }
