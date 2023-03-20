@@ -53,10 +53,14 @@ public class WishListController {
 		
 		//로그인된 회원 조회
 		Member member = this.memberService.getMember(principal.getName());
+		System.out.println("이름 보여줘: " + principal.getName());
 		
 		List<PlayList> findWl = wishListService.findWl(member.getIdNum());
 		
+		List<PlayList> myPlayList = playListService.findMemberPl(member.getIdNum());
+		
 		model.addAttribute("wishlist",findWl);
+		model.addAttribute("myList", myPlayList);
 		model.addAttribute("memberInfo", member);
 		return "playlist/WishList";
 	}

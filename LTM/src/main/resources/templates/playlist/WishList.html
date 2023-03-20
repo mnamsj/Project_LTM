@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/MainPlayList.css}">
 <link rel="stylesheet" href="/css/cboard_list.css" />
 <link rel="stylesheet" href="/css/MyPage.css" />
+
 </head>
 <body>
 <div layout:fragment="content" class="blog-area section_padding_100 mt-100">
@@ -91,7 +92,20 @@
                     <!-- 탭2_1 -->
                     <div class="tab-cont">
                       <div class="form-group">
-                        aa
+                        <div class="Allplaylist">
+                        
+				        	<div class="item" th:each="mylists: ${myList}">
+								<img class="plimage1" th:if="${mylists.image != null}" th:src="${mylists.image}">
+								<img class="plimage1" th:unless="${mylists.image != null}" src="/img/nullsongimg.png">
+								<a th:href="@{/playlist/{id}/song (id=${mylists.id})}">
+								<span class="titletext" th:text="${mylists.title}"></span>
+								<span class="idtext" th:text="${mylists.member.username}"></span>
+								</a>
+								<a class="delete btn btn-light" th:data-uri="@{|/delete/${id} (id=${mylists.id})}" sec:authorize="isAuthenticated()"
+								th:if="${mylists.id != null }" th:text="삭제"></a>
+		
+							</div>				
+						</div>
 
                       </div>
                     </div>

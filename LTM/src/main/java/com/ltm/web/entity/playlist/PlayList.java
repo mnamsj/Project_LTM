@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -36,8 +37,8 @@ public class PlayList {
 	
 	private String image;
 	
-	@OneToOne(mappedBy = "playList",fetch = FetchType.LAZY)
-	private WishList wishList;
+	@OneToMany(mappedBy = "playList",fetch = FetchType.LAZY)
+	private List<WishList> wishList;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idNum")

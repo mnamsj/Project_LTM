@@ -28,6 +28,25 @@
 						<br> 소개글
 						<li th:text="${Playlist.discription}"></li>
 						<br><li>DJ : <a th:text="${Playlist.id}"></li>
+						<li>
+							<a sec:authorize="isAuthenticated()"
+								th:onclick="wishlist('[[${Playlist.id}]]')"> 
+							<span
+								 sec:authorize="isAuthenticated()"
+								th:if="${ #authentication.getPrincipal().getUsername() != Playlist.member.username}" th:text="좋아요"> 
+							</span>
+							<span
+								 sec:authorize="isAuthenticated()"
+								th:if="${#authentication.getPrincipal().getUsername() == Playlist.member.username}"> 
+							</span>
+							
+							<span
+								 
+								th:if="${Playlist.id} == ${findWl}" th:text="alert"> 
+							</span>
+							
+							</a>
+						</li>
 						</ul>
 					</td>
 				<tr>
@@ -52,7 +71,7 @@
 				<td sec:authorize="isAuthenticated()">
 				<a class="delete btn btn-light" th:data-uri="@{|/playlist/delete/${Song.playList.id}/${Song.id}}"
 				 sec:authorize="isAuthenticated()"
-						th:if="${Song.id != null }" th:text="삭제"></a>
+						th:if="${Song.id != null and #authentication.getPrincipal().getUsername() == Song.playList.member.username}" th:text="삭제"></a>
 			</tr>
 			</div>
 		</table>
@@ -74,6 +93,22 @@
 		document.body.appendChild(form);
 		form.submit();
 	}
+	
+	function wishlist(plId){
+		var form = document.createElement("form");
+		form.setAttribute("method", "post");
+		form.setAttribute("action", "/getwishlist");
+		var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "plId");
+        hiddenField.setAttribute("value", plId);
+        form.appendChild(hiddenField);
+
+        
+		document.body.appendChild(form);
+		form.submit();
+
+	}   
 	
 	const delete_elements = document.getElementsByClassName("delete");
 	   Array.from(delete_elements).forEach(function(element) {
