@@ -218,3 +218,8 @@ transform: rotateY(-70deg);
   transform: rotate(135deg);
 }
 
+.wish_pl_song{
+	border-collapse: separate;
+	border-spacing: 10px 10px;
+}
+

@@ -3,17 +3,21 @@
 <head>
 	<link rel="stylesheet" type="text/css"
 		th:href="@{/css/MainPlayList.css}">
-	<link rel="stylesheet" type="text/css"
-		th:href="@{/css/PlaylistModal.css}">
+
 		
 </head>
+
 <body>
+<<<<<<< HEAD
 <!-- 모달 -->
 <div class="modal" id="create-modal">
 	
 		<th:block th:insert="~{playlist/createPlForm :: createForm}"></th:block>
 	</div>
 	
+=======
+
+>>>>>>> 71bb6afeadbb274365a1e8830157a4642c849848
 <div layout:fragment="content"
 		class="container" style="margin-top: 200px;">
 
@@ -28,8 +32,12 @@
 							<div class="nav__content">
 								<ul class="nav__items">
 									<li class="nav__item">
+<<<<<<< HEAD
 										<a class="nav__item-text" data-toggle="modal" data-target="#create-modal"
 										> 
+=======
+										<a class="nav__item-text"> 
+>>>>>>> 71bb6afeadbb274365a1e8830157a4642c849848
 											플레이리스트 만들기 
 										</a>
 										
@@ -64,18 +72,22 @@
 			<div class="Allplaylist">
 				<div class="item" th:each="Playlist, PlaylistStatus : ${paging}">
 
-					<!-- <p th:text="${Playlist.nickname}"></p> -->
-
-					<a th:href="@{/playlist/{id}/song (id=${Playlist.id})}"> <img
-						class="plimage1" th:if="${Playlist.image != null}"
+					<a th:href="@{/playlist/{id}/song (id=${Playlist.id})}"> 
+					<img class="plimage1" th:if="${Playlist.image != null}"
 						th:src="${Playlist.image}"> <img class="plimage1"
 						th:unless="${Playlist.image != null}" src="/img/nullsongimg.png">
+<<<<<<< HEAD
+						<span class="titletext" th:text="${Playlist.title}"></span> 
+						<span class="idtext" th:text="${Playlist.member.username}"></span></a>
+						<a sec:authorize="isAuthenticated()" th:onclick="wishlist('[[${Playlist.id}]]')"> 
+						<span class="idtext"> 좋아요 </span>
+					</a>
+=======
 						<span class="titletext" th:text="${Playlist.title}"></span> <span
 						class="idtext" th:text="${Playlist.member.username}"></span>
-					</a> <a sec:authorize="isAuthenticated()"
-						th:onclick="wishlist('[[${Playlist.id}]]')"> <span
-						class="idtext"> 좋아요 </span>
-					</a>
+					</a> 
+					
+>>>>>>> db512c96d4e76807df1b0a318081e34ed83fa940
 				</div>
 			</div>
 
@@ -112,6 +124,8 @@
 	</div>
 
 
+<th:block layout:fragment="script">
+    
 		<script type='text/javascript'>
 			const page_elements = document.getElementsByClassName("page-link");
 			Array.from(page_elements).forEach(function(element) {
@@ -128,6 +142,7 @@
 				document.getElementById('searchForm').submit();
 			});
 			
+<<<<<<< HEAD
 			function wishlist(plId){
 				var form = document.createElement("form");
 				form.setAttribute("method", "post");
@@ -151,9 +166,13 @@
         	 modal.style.display = 'block';
         }
         </script>
+=======
+>>>>>>> 71bb6afeadbb274365a1e8830157a4642c849848
 		
-
-
+		</script>
+		
+</th:block>
+	
 
 </body>
 </html>
