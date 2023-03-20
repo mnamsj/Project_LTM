@@ -22,7 +22,7 @@
 		<table style="width: 90%;">
 			<thead>
 				<tr style="border-bottom: 1px solid #e9e9e9; text-align: center; height: 50px">
-					<td>번호</td>
+					<td style="padding-right: 20px">번호</td>
 					<td>제목</td>
 					<td>작성자</td>
 					<td>작성일</td>
@@ -32,8 +32,8 @@
 			</thead>
 		<tbody>
 			<tr th:each="cboard, loop : ${paging}" style="height: 50px">
-				<td style="border-bottom: 1px solid #e9e9e9; text-align: center;" th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
-				<td style="border-bottom: 1px solid #e9e9e9; text-align: center;">
+				<td style="border-bottom: 1px solid #e9e9e9; text-align: center; padding-right: 20px" th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+				<td style="border-bottom: 1px solid #e9e9e9;">
 					<a th:href="@{|/cboard/detail/${cboard.id}|}" th:text="${cboard.ctitle}"></a>
 						<span style="color: red;" th:if="${#lists.size(cboard.replyList) > 0}" th:text="${#lists.size(cboard.replyList)}"></span>
 				</td>
