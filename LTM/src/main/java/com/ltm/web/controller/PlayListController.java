@@ -138,12 +138,9 @@ public class PlayListController {
 
 	}
 
-<<<<<<< HEAD
-	// 플레이리스트 상세 페이지
-=======
+
 	//플레이리스트 상세 페이지
 	@PreAuthorize("isAuthenticated()")
->>>>>>> db512c96d4e76807df1b0a318081e34ed83fa940
 	@GetMapping("/{id}/song")
 	public String pldetail(Model model, @PathVariable("id") Long plId, Principal principal) {
 		
@@ -155,7 +152,7 @@ public class PlayListController {
 		PlayList playlist = this.playListService.findOne(plId);
 		
 		for (int i = 0; i < findWl.size(); i++) {
-			if(findWl.get(i).getId() != playlist.getId()) {
+			if(findWl.get(i).getId() == playlist.getId()) {
 				model.addAttribute("findWl",findWl.get(i).getId());
 			}
 		}
@@ -214,24 +211,10 @@ public class PlayListController {
 	// 플레이리스트에서 노래삭제
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/delete/{plId}/{id}")
-<<<<<<< HEAD
 	public String plSongDelete(@PathVariable("plId") Integer plId, @PathVariable("id") Integer id,
 			Principal principal) {
-
-//		PlayList playList = this.playListService.getPl(Long.valueOf(plId));
-		PlSong plSong = this.playListService.getPlsong(Long.valueOf(id));
-
-		/*
-		 * if (!plSong.getPlayList().getMember().equals(principal.getName())) { throw
-		 * new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다."); }
-		 */
-
-=======
-	public String plSongDelete(@PathVariable("plId") Integer plId, @PathVariable("id") Integer id, Principal principal) {
-		System.out.println("4444444444444");
-		
-		
-		
+	
+			
 //		PlayList playList = this.playListService.getPl(Long.valueOf(plId));
 		PlSong plSong = this.playListService.getPlsong(Long.valueOf(id));
 		
@@ -239,7 +222,6 @@ public class PlayListController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
 		}
 		
->>>>>>> db512c96d4e76807df1b0a318081e34ed83fa940
 		this.playListService.deletePlsong(plSong);
 		return "redirect:/playlist/list";
 	}

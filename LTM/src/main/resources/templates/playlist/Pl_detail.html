@@ -24,26 +24,30 @@
 					</td>
 					<td style="border-bottom: 0px; text-align: center; padding-right: 20px"></td>
 					<td>
-						<ul>	
-						<li th:text="${Playlist.title}"></li>
-						<br> 소개글 :
+						<ul>
+							제목:	
+							<li th:text="${Playlist.title}"></li>
+						<br> 
+						소개글:
 						<li th:text="${Playlist.discription}"></li>
-<<<<<<< HEAD
-						<br><li>DJ : <a th:text="${Playlist.member.username}"></li>
+
 						<br>
-						<li>
+						<li th:text="${Playlist.member.username}"></li>
+						<br>
+						<!-- <li>
 							<button sec:authorize="isAuthenticated()" th:onclick="wishlist('[[${Playlist.id}]]')"> 
-							<span class="idtext2">위시리스트 담기</span></button>
+							<span class="idtext2">위시리스트 담기</span></button> -->
 							<!-- <a class="wish btn btn-light" th:data-uri="@{|/playlist/wishlist/${Playlist.id}}"
 							sec:authorize="isAuthenticated()" th:text="담기"></a> -->
-=======
-						<br><li>DJ : <a th:text="${Playlist.id}"></li>
+
+						<br>
 						<li>
+						<!-- 이 부분은 내일 다시 만져봐야할 것 같습니다. -->
 							<a sec:authorize="isAuthenticated()"
 								th:onclick="wishlist('[[${Playlist.id}]]')"> 
 							<span
 								 sec:authorize="isAuthenticated()"
-								th:if="${ #authentication.getPrincipal().getUsername() != Playlist.member.username}" th:text="좋아요"> 
+								th:if="${#authentication.getPrincipal().getUsername() != Playlist.member.username}" th:text="좋아요"> 
 							</span>
 							<span
 								 sec:authorize="isAuthenticated()"
@@ -51,12 +55,12 @@
 							</span>
 							
 							<span
-								 
+								sec:authorize="isAuthenticated()" 
 								th:if="${Playlist.id} == ${findWl}" th:text="alert"> 
 							</span>
 							
 							</a>
->>>>>>> db512c96d4e76807df1b0a318081e34ed83fa940
+
 						</li>
 						</ul>
 					</td>
@@ -70,10 +74,10 @@
 		<table class="wish_pl_song">
 			<tr style="height: 50px">
 				<th style="padding-right: 200px">  </th>
-				<th>  </th>
-				<th style="padding-right: 200px">노래제목</th>
-				<th>  </th>
-				<th style="padding-right: 200px">가수</th>
+				<th>노래제목</th>
+				<th style="padding-right: 200px"></th>
+				<th>가수</th>
+				<th style="padding-right: 200px"></th>
 			</tr>
 			<div class="item2" th:each="Song : ${song22}">
 				<!-- <img th:src="@{/img/album/} + ${Song.thumbnail}" /> -->
@@ -83,15 +87,15 @@
 				<td style="border-bottom: 0px; text-align: center; padding-right: 20px" th:text="${Song.songTitle}"></td>
 				<td> </td>
 				<td style="border-bottom: 0px; text-align: center; padding-right: 20px" th:text="${Song.singer}"></td>
+				<td></td>
 				<td sec:authorize="isAuthenticated()">
 				<a class="delete btn btn-light" th:data-uri="@{|/playlist/delete/${Song.playList.id}/${Song.id}}"
-<<<<<<< HEAD
-				 sec:authorize="isAuthenticated()" th:if="${Song.id != null}" th:text="삭제"></a>
+				 sec:authorize="isAuthenticated()" th:if="${Song.id != null and #authentication.getPrincipal().getUsername() == Song.playList.member.username}" th:text="삭제">></a>
 				<!-- and #authentication.getPrincipal() == Song.playlist.member.id -->
-=======
-				 sec:authorize="isAuthenticated()"
-						th:if="${Song.id != null and #authentication.getPrincipal().getUsername() == Song.playList.member.username}" th:text="삭제"></a>
->>>>>>> db512c96d4e76807df1b0a318081e34ed83fa940
+
+				<!--  sec:authorize="isAuthenticated()"
+						th:if="${Song.id != null and #authentication.getPrincipal().getUsername() == Song.playList.member.username}" th:text="삭제"></a> -->
+
 			</tr>
 			</div>
 		</table>
