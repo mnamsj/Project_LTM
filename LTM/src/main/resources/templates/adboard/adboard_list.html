@@ -46,6 +46,11 @@
 			</a>
 		</div>
 	</table>
+	
+	<form>
+			
+				<a class="btn btn-light" style="float: right; margin-top: 35px; margin-right: 85px;"  sec:authorize="hasRole('ADMIN')" th:href="@{/cboard/create}">글쓰기</a>
+		</form>
 	<div th:if="${paging}" aria-label="Page navigation example" style="margin-left: 290px; padding-top: 30px;">
 		<ul style="list-style: none;" class="pagination">
 			<li class="page-item" th:classappend="${!paging.hasPrevious}? 'disabled'">
