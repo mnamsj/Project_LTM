@@ -3,15 +3,12 @@
 <head>
 	<link rel="stylesheet" type="text/css"
 		th:href="@{/css/MainPlayList.css}">
-	<link rel="stylesheet" type="text/css"
-		th:href="@{/css/PlaylistModal.css}">
+
 		
 </head>
+
 <body>
-<!-- 모달 -->
-	<div class="modal">
-		<th:block th:replace="~{playlist/createPlForm :: createForm}"></th:block>
-	</div>
+
 <div layout:fragment="content"
 		class="blog-area section_padding_100 mt-100">
 		<div class="container">
@@ -26,7 +23,7 @@
 							<div class="nav__content">
 								<ul class="nav__items">
 									<li class="nav__item">
-										<a class="nav__item-text" id="btn-open-popup"> 
+										<a class="nav__item-text"> 
 											플레이리스트 만들기 
 										</a>
 										
@@ -65,11 +62,18 @@
 					<img class="plimage1" th:if="${Playlist.image != null}"
 						th:src="${Playlist.image}"> <img class="plimage1"
 						th:unless="${Playlist.image != null}" src="/img/nullsongimg.png">
+<<<<<<< HEAD
 						<span class="titletext" th:text="${Playlist.title}"></span> 
 						<span class="idtext" th:text="${Playlist.member.username}"></span></a>
 						<a sec:authorize="isAuthenticated()" th:onclick="wishlist('[[${Playlist.id}]]')"> 
 						<span class="idtext"> 좋아요 </span>
 					</a>
+=======
+						<span class="titletext" th:text="${Playlist.title}"></span> <span
+						class="idtext" th:text="${Playlist.member.username}"></span>
+					</a> 
+					
+>>>>>>> db512c96d4e76807df1b0a318081e34ed83fa940
 				</div>
 			</div>
 
@@ -106,6 +110,8 @@
 	</div>
 
 
+<th:block layout:fragment="script">
+    
 		<script type='text/javascript'>
 			const page_elements = document.getElementsByClassName("page-link");
 			Array.from(page_elements).forEach(function(element) {
@@ -122,37 +128,11 @@
 				document.getElementById('searchForm').submit();
 			});
 			
-			function wishlist(plId){
-				var form = document.createElement("form");
-				form.setAttribute("method", "post");
-				form.setAttribute("action", "/getwishlist");
-				var hiddenField = document.createElement("input");
-		        hiddenField.setAttribute("type", "hidden");
-		        hiddenField.setAttribute("name", "plId");
-		        hiddenField.setAttribute("value", plId);
-		        form.appendChild(hiddenField);
-
-		        
-				document.body.appendChild(form);
-				form.submit();
-			}
-		</script>
-		<script>
-          const modal = document.querySelector('.modal');
-          const btnOpenPopup = document.getElementById("btn-open-popup");
-    
-          btnOpenPopup.addEventListener('click', () => {
-            modal.style.display = 'block';
-          });
-       	 modal.addEventListener('click', function(e){
-            if(e.target == modal){
-              modal.style.display = 'none';
-            }
-          });
-        </script>
 		
-
-
+		</script>
+		
+</th:block>
+	
 
 </body>
 </html>

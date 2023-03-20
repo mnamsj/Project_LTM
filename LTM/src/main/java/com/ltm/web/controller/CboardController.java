@@ -82,14 +82,14 @@ public class CboardController {
 					this.cboardService.updateView(id);
 					oldCookie.setValue(oldCookie.getValue() + "_[" + id + "]");
 					oldCookie.setPath("/");
-					oldCookie.setMaxAge(60 * 60 * 24); 							
+					oldCookie.setMaxAge(1); 							
 					response.addCookie(oldCookie);
 				}
 			} else {
 				this.cboardService.updateView(id);
 				Cookie newCookie = new Cookie("postView", "[" + id + "]");				
 				newCookie.setPath("/");
-				newCookie.setMaxAge(60 * 60 * 24); 								
+				newCookie.setMaxAge(1); 								
 				response.addCookie(newCookie);
 			}
 			

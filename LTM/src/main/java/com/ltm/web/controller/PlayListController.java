@@ -25,6 +25,7 @@ import com.ltm.web.Dto.PlayListFormDto;
 import com.ltm.web.Service.MemberService;
 import com.ltm.web.Service.PlSongService;
 import com.ltm.web.Service.PlayListService;
+import com.ltm.web.Service.WishListService;
 import com.ltm.web.api.SongImageApi;
 import com.ltm.web.entity.Member;
 import com.ltm.web.entity.playlist.PlSong;
@@ -45,6 +46,7 @@ public class PlayListController {
 	private final MemberService memberService;
 	private final PlSongRepository plSongRepository;
 	private final SongImageApi songImageApi;
+	private final WishListService wishListService;
 
 	// 플레이리스트 만들기
 	@PreAuthorize("isAuthenticated()")
@@ -122,13 +124,8 @@ public class PlayListController {
 		// 쓰지않고 서비스를 통해서 사용하도록 작성
 		// model.addAttribute("playList2", playList);
 
-		System.out.println("***************************");
-		System.out.println(page);
-		System.out.println(kw);
-		System.out.println("***************************");
-
 		if ("".compareTo(kw) == 0) {
-			Page<PlayList> paging = this.playListService.getlist(page);
+			Page<PlayList> paging = this.playListService.getlist(page);	
 			model.addAttribute("paging", paging);
 			model.addAttribute("kw", kw);
 			return "playlist/Pl_main";
@@ -141,12 +138,31 @@ public class PlayListController {
 
 	}
 
+<<<<<<< HEAD
 	// 플레이리스트 상세 페이지
+=======
+	//플레이리스트 상세 페이지
+	@PreAuthorize("isAuthenticated()")
+>>>>>>> db512c96d4e76807df1b0a318081e34ed83fa940
 	@GetMapping("/{id}/song")
-	public String pldetail(Model model, @PathVariable("id") Long plId) {
+	public String pldetail(Model model, @PathVariable("id") Long plId, Principal principal) {
+		
+		//로그인한 회원 조회
+		Member member = this.memberService.getMember(principal.getName());
+		//그 회원의 위시리스트 조회
+		List<PlayList> findWl = wishListService.findWl(member.getIdNum());
+		
 		PlayList playlist = this.playListService.findOne(plId);
-		model.addAttribute("playList22", playlist);
+		
+		for (int i = 0; i < findWl.size(); i++) {
+			if(findWl.get(i).getId() != playlist.getId()) {
+				model.addAttribute("findWl",findWl.get(i).getId());
+			}
+		}
 
+		model.addAttribute("playList22", playlist);
+		
+		
 		List<PlSong> songs = plSongService.findPlSongs(plId);// 리스트로 담는 것도 생각해보기, plsong 연결필요
 		model.addAttribute("song22", songs);
 		return "playlist/Pl_detail";
@@ -198,6 +214,7 @@ public class PlayListController {
 	// 플레이리스트에서 노래삭제
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/delete/{plId}/{id}")
+<<<<<<< HEAD
 	public String plSongDelete(@PathVariable("plId") Integer plId, @PathVariable("id") Integer id,
 			Principal principal) {
 
@@ -209,6 +226,20 @@ public class PlayListController {
 		 * new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다."); }
 		 */
 
+=======
+	public String plSongDelete(@PathVariable("plId") Integer plId, @PathVariable("id") Integer id, Principal principal) {
+		System.out.println("4444444444444");
+		
+		
+		
+//		PlayList playList = this.playListService.getPl(Long.valueOf(plId));
+		PlSong plSong = this.playListService.getPlsong(Long.valueOf(id));
+		
+		if(!plSong.getPlayList().getMember().getUsername().equals(principal.getName())) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+		}
+		
+>>>>>>> db512c96d4e76807df1b0a318081e34ed83fa940
 		this.playListService.deletePlsong(plSong);
 		return "redirect:/playlist/list";
 	}
