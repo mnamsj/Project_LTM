@@ -27,7 +27,7 @@ public JSONArray songResults(String songInfo){
 			encodeSongInfo = URLEncoder.encode(songInfo,"UTF-8");
 			//url 객체 생성
 			URL url = new URL("http://ws.audioscrobbler.com/2.0/?method=track.search&track=" 
-				+ encodeSongInfo + "&api_key=" + apiKey + "&format=json");
+				+ encodeSongInfo + "&api_key=" + apiKey + "&format=json&limit=20");
 			
 			//요청하고자 하는 url과 통신하기 위한 connection 객체 생성
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();

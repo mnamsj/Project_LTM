@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org" layout:decorate="~{layout}" lang="en">
 <head>
-	<link rel="stylesheet" type="text/css"
-		th:href="@{/css/MainPlayList.css}">
-
+	<link rel="stylesheet" href="/css/core-style.css" />
+   <link rel="stylesheet" type="text/css"
+      th:href="@{/css/MainPlayList.css}">
 		
 </head>
 
 <body>
 
 <!-- 모달 -->
-<div class="modal" id="create-modal">
-	
-		<th:block th:insert="~{playlist/createPlForm :: createForm}"></th:block>
-	</div>
+
+
 
 <div layout:fragment="content"
 		class="container" style="margin-top: 200px;">
@@ -29,16 +27,12 @@
 							<div class="nav__content">
 								<ul class="nav__items">
 									<li class="nav__item">
-
-
-
-										<a class="nav__item-text"> 
-
-											플레이리스트 만들기 
-										</a>
-										
-										
-											 	
+									<div>
+		                              <a class="nav__item-text" href="#plModal" data-toggle="modal">
+		                                 플레이리스트 만들기 
+		                              </a>   
+		                            </div> 
+																																			 	
 									</li>
 									<li class="nav__item">
 										<a class="nav__item-text"
@@ -50,6 +44,17 @@
 							</div>
 							<label class="nav__btn" for="menu-cb"></label>
 						</nav>
+						
+				
+			        <div class="modal fade" id="plModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			          <div class="modal-dialog modal-dialog-centered">
+        				<div class="modal-content" style="width: 560px; height: 380px; background: black;">
+			          <th:block th:replace="~{playlist/createPlForm :: createForm}"></th:block>
+			          </div>
+			          </div>
+			          </div>
+			        
+			      
 					</li>
 					<li style="width: 40%; float: left;">
 						<div class="input-group" style="width: 100%;">
@@ -150,13 +155,25 @@
 			}
 		</script>
 		
-		<script>
-		const createModal = document.getElementById('create-modal');
-		const modal = document.querySelector('.modal');
-        function open(){
-        	 modal.style.display = 'block';
-        }
-        </script>
+		<!-- 모달 자바스크립트 -->
+   <script type="text/javascript">
+  
+	var myModal = new bootstrap.Modal(document.getElementById("plModal"), {});
+      document.onreadystatechange = function () {
+      myModal.show();
+      }; 
+   </script>
+ <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous">
+   </script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+      integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+      crossorigin="anonymous">
+   </script>
+   <script src="./app.js"></script>
+   <!-- 모달 스크립트 끝 -->
+
 
 		
 
