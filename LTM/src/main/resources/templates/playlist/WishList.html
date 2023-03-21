@@ -4,7 +4,6 @@
 	  lang="en">
 <head>
 <link rel="stylesheet" type="text/css" th:href="@{/css/MainPlayList.css}">
-<link rel="stylesheet" href="/css/cboard_list.css" />
 <link rel="stylesheet" href="/css/MyPage.css" />
 
 </head>
@@ -21,21 +20,51 @@
 		
  		<div class="item1" th:each="memberInfo: ${memberInfo}">
 			<h3 style="">
-			<li><img src="/img/profile.png" alt="">회원 정보</li>
-			<br>
-			<li>
-				아이디 : <span style="list-style:none;" th:text="${memberInfo.idNum}"></span>
-			</li>
-			<li>
-				이름 : <span style="list-style:none;" th:text="${memberInfo.username}"></span>
-			</li>
-			<li>
-				이메일 : <span style="list-style:none;" th:text="${memberInfo.email}"></span>
-			</li>
+			<table>
+				<tr>
+					<td style="border-bottom : 0px; text-align:center; padding-right:50px;"></td>
+					<td colsapn=2 style="border-bottom : 0px; text-align:center; padding-right:50px;">
+						<img src="/img/profile.png">
+					</td>
+					<td style="border-bottom : 0px; text-align:center; padding-right:20px;"></td>
+					<td>
+						<ul>
+							<br>
+							<li>
+								<span style="list-style:none;" th:text="${memberInfo.username}"></span>
+							 님,  환영합니다.</li>
+						</ul>
+					</td>
+				</tr>
+				<tr> </tr>
+				<tr>
+					<td> </td>
+					<td>
+						<ul>
+							<br>
+							<li style="border-bottom : 0px; padding-right:50px;">
+								아이디 : <span style="list-style:none;" th:text="${memberInfo.idNum}"></span>
+							</li>
+							<li style="border-bottom : 0px; padding-right:50px;">
+								이름 : <span style="list-style:none;" th:text="${memberInfo.username}"></span>
+							</li>
+							<li style="border-bottom : 0px; padding-right:50px;">
+								이메일 : <span style="list-style:none;" th:text="${memberInfo.email}"></span>
+							</li>
+						</ul>
+					</td>
+					<td> </td>
+					<td> </td>
+					<td>
+						<a class="btn" sec:authorize="isAuthenticated()" th:href="@{/}" th:text="로그아웃"></a>
+						<a class="btn"  th:text="회원정보수정"></a>
+					</td>
+				</tr>
+			</table>
 			</h3>
 		</div>
  <br>
-<hr style="border-top: 1px solid black; margin: 1rem 35px;">
+<hr style="border-top: 1px solid black; margin: 1rem 5px;">
 
 	
 
@@ -63,17 +92,21 @@
             <div class="tab-cont">
                 <div class="form-group">
                     <!-- 플레이리스트 목록 -->
-				<div class="Allplaylist">
-		        	<div class="item" th:each="lists: ${wishlist}">
-						<img class="plimage1" th:if="${lists.image != null}" th:src="${lists.image}">
-						<img class="plimage1" th:unless="${lists.image != null}" src="/img/nullsongimg.png">
-						<a th:href="@{/playlist/{id}/song (id=${lists.id})}">
-						<span class="titletext" th:text="${lists.title}"></span>
-						<span class="idtext" th:text="${lists.member.username}"></span>
-						</a>
-						<a class="delete btn btn-light" th:data-uri="@{|/delete/${id} (id=${lists.id})}" sec:authorize="isAuthenticated()"
-						th:if="${lists.id != null }" th:text="삭제"></a>
-
+				<div class="Allplaylist" style="display:grid; grid-template-columns:reapeat(3,1fr); gap:15px;">
+		        	<div class="item" style="position:relative; width:80%; margin:10px auto;"
+		        	th:each="lists: ${wishlist}">
+		        	<table>
+		        		<tr>
+							<img class="plimage1" th:if="${lists.image != null}" th:src="${lists.image}">
+							<img class="plimage1" th:unless="${lists.image != null}" src="/img/nullsongimg.png">
+							<a th:href="@{/playlist/{id}/song (id=${lists.id})}">
+							<span class="titletext" th:text="${lists.title}"></span>
+							<span class="idtext" th:text="${lists.member.username}"></span>
+							</a>
+							<center><a class="delete btn btn-light" id="buttontext" th:data-uri="@{|/delete/${id} (id=${lists.id})}" sec:authorize="isAuthenticated()"
+							th:if="${lists.id != null }" th:text="삭제"></a></center>
+						</tr>
+					</table>
 					</div>				
 				</div>
                 </div>
@@ -101,8 +134,8 @@
 								<span class="titletext" th:text="${mylists.title}"></span>
 								<span class="idtext" th:text="${mylists.member.username}"></span>
 								</a>
-								<a class="delete btn btn-light" th:data-uri="@{|/delete/${id} (id=${mylists.id})}" sec:authorize="isAuthenticated()"
-								th:if="${mylists.id != null }" th:text="삭제"></a>
+								<center><a class="delete btn btn-light" th:data-uri="@{|/delete/${id} (id=${mylists.id})}" sec:authorize="isAuthenticated()"
+								th:if="${mylists.id != null }" th:text="삭제"></a></center>
 		
 							</div>				
 						</div>
