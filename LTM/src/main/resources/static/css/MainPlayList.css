@@ -232,3 +232,7 @@ transform: rotateY(-70deg);
 	border-spacing: 10px 10px;
 }
 
+.item1 .btn{
+	background-color:#dcdcdc;
+	opacity: 0.5
+}
