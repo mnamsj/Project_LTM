@@ -1,43 +1,85 @@
 <!DOCTYPE HTML>
-<html xmlns:th="www.thymeleaf.org" 
-	  lang="en">
+<html xmlns:th="www.thymeleaf.org" lang="en">
 <head>
 	<link rel="stylesheet" href="/css/PlaylistModal.css">
 </head>
+
+<style>
+
+	
+	button:hover{
+    	background: #606060;
+    	color: white;
+    	transition: all 0.3s;
+}
+</style>
 <body>
 <th:block th:fragment="createForm">
-<div class="modal">
 
-	<div class="content">
+	<!-- <div class="content"> -->
 		
 		<form th:action="@{/playlist/new}" th:object="${playListFormDto}"
 			method="post">
-			<div class="header">
-				<h2>플레이리스트 만들기</h2>
+			<div class="modal-header" style="padding:24px 24px 0; border-bottom: none;">
+				<h2 style="color: white;">플레이리스트 만들기</h2>
 			</div>
-			<div class="content-body">
-			<div class="title-form">
-				<label th:for="title"><span>제목 :</span></label> 
-				<input type="text"
-					th:field="*{title}" class="title">
+			<div class="modal-body" style="min-height: 205px; padding: 30px 20px 0;">
+			<div class="mb-3" style="display: block; height: 100px; width: 480px; position: absolute;">
+				<label for="recipient-name" class="recipient-name" >
+					<span style="position: absolute; margin: 35px 15px; font-size: 18px; color: white;">제목 :</span>
+				</label> 
+				<input type="text" class="form-control" id="form-control" name="title"
+				style="position: absolute;
+				       margin: 18px 30px;
+				       left: 70px;
+				       height: 28px;
+				       width: 65%;
+				       border: 0;
+				       border-bottom: 1px solid white;
+				       border-radius: 0;
+				       box-shadow: none;
+				       background: transparent;
+				       font-size: 15px;
+				       color: white;">
 			</div>
-			<div class="discription-form">
-				<label th:for="discription"><span>설명</span></label> 
-				<input type="text"
-					th:field="*{discription}" class="discription">
+			<div class="mb-3" style="display: block; height: 100px; width: 480px; position: absolute; top: 50%; bottom: 50%;">
+				<label for="message-text" class="col-form-label">
+					<span style="position: absolute; margin: 35px 15px; font-size: 18px; color: white;">설명: </span>
+				</label> 
+				<input type="text" class="form-control" id="message-text" name="discription"
+						style="position: absolute;
+							    margin: 18px 30px;
+							    left: 70px;
+							    height: 28px;
+							    width: 65%;
+							    border: 0;
+							    border-bottom: 1px solid white;
+							    border-radius: 0;
+							    box-shadow: none;
+							    background: transparent;
+							    font-size: 15px;
+							    color: white;">
 			</div>
 			</div>
 			
-			<div class="content-footer">
-				<button type="button" class="btn-cancel">취소</button>
-				<button type="submit" class="btn-create">만들기</button>
+			<div class="modal-footer" style="border-top: none; display: flex; justify-content: flex-end; padding: 30px 35px 24px; gap: 30px;">
+				<!-- <button type="button" class="btn-cancel">취소</button> -->
+				<button type="submit" class="btn btn-primary"
+						style="position: relative;
+							    background-color:white;
+							    color: black;
+							    border:none;
+							    border-radius:20px;
+							    box-shadow: none;
+							    width: 74px;
+							    height:36px;
+							    text-align: center;
+							    cursor: pointer;
+							    transition: all 0.5s;">
+    					만들기</button>
 			</div>
 		</form>
-		
-	</div>
-
-
-</div>
+	<!-- 	</div> -->
 
 </th:block>
 </body>

@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+.search-bar{
+		display: flex;
+		width: 50%;
+		margin: auto;
+		align-items: center;
+		background: black;
+		border-radius: 10px;
+	}
+	
+	.whatToSearch{
+		flex: 1;
+		width: 100%;
+    	height: 40px;
+    	background: transparent;
+    	color: white;
+    	border: none;
+    	border-radius: 10px;
+    	padding-left: 15px;
+	}
+	.whatToSearch:focus{
+		outline: none;
+	}
+	
+	.submit-button{
+		border: none;
+    	background: transparent;
+    	color: white;
+    	padding-right: 10px
+	}
+	
+	.submit-button:focus{
+		outline: none;
+	}
+	
+	.search-result{
+		text-align: center;
+		width: 50%;
+		margin: auto;
+		background: black;
+		color: white;
+		border-radius: 20px;
+	}
+	
+	.musicListList{
+		padding: 8px 5px 0; 
+	}
+	
+	.musicList{
+		display: flex;
+		padding: 8px 0;
+		align-items: center;
+	}
+	
+	.img{
+		display: inline-flex;
+		padding: 0 16px;
+	}
+	
+	.songTitle{
+		padding-left: 10px;
+    	flex: 1;
+    	text-align: left;
+	}
+	.singer{
+		display:none;
+	}
